@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+@font-face {
+  font-family: "Metropolis-ExtraBold";
+  src: local("Metropolis-ExtraBold"),
+  url("./resources/fonts/Metropolis-ExtraBold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Metropolis-SemiBold";
+  src: local("Metropolis-SemiBold"),
+  url("./resources/fonts/Metropolis-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Metropolis-Bold";
+  src: local("Metropolis-Bold"),
+  url("./resources/fonts/Metropolis-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Metropolis-Medium";
+  src: local("Metropolis-Medium"),
+  url("./resources/fonts/Metropolis-Medium.ttf") format("truetype");
+}
+
+
+@font-face {
+  font-family: "Metropolis-RegularItalic";
+  src: local("Metropolis-RegularItalic"),
+  url("./resources/fonts/Metropolis-RegularItalic.ttf") format("truetype");
+}
