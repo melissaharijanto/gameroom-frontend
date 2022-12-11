@@ -9,10 +9,10 @@ const Button = styled.button`
     border-radius: 50px;
     cursor: pointer;
 `
-const LogIn = styled(Button)`
+const LogIn = styled(Button)<{marginRight: string}>`
     background-image: linear-gradient(to right, ${Colors.MAGENTA100}, ${Colors.BLUE100});
     color: white;
-    margin-right: 0.75em;
+    margin-right: ${(props) => props.marginRight ? props.marginRight: "0em"}
 `
 
 const SignUp = styled(Button)`
