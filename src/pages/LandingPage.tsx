@@ -5,7 +5,7 @@ import Logo from '../resources/images/logos/colored-text.png';
 import { SignUp, LogIn } from '../components/Button';
 import * as Layout from '../components/Layout';
 import { StyledBackgroundBeforeLogin } from '../components/Background';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StyledConsole = styled.img`
     width: 55%;
