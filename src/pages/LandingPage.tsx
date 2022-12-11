@@ -5,7 +5,7 @@ import Logo from '../resources/images/logos/colored-text.png';
 import { SignUp, LogIn } from '../components/Button';
 import * as Layout from '../components/Layout';
 import { StyledBackgroundBeforeLogin } from '../components/Background';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const StyledConsole = styled.img`
     width: 55%;
@@ -24,7 +24,19 @@ const StyledText = styled.text`
     color: ${Colors.WHITE100}
 `
 
+
 const LandingPage = () => {
+
+    const navigation = useNavigate();
+
+    const navigateToLogIn = () => {
+        navigation("/login");
+    }
+
+    const navigateToSignUp= () => {
+        navigation("/signup");
+    }
+
     return (
         <StyledBackgroundBeforeLogin>
             <Layout.HorizontalGrid>
@@ -36,12 +48,8 @@ const LandingPage = () => {
                         <StyledText>welcome to</StyledText>
                         <StyledLogo src={Logo}/>
                         <Layout.FlexHorizontalLayout>
-                            <Link to="/login">
-                                <LogIn>Log In</LogIn>
-                            </Link>
-                            <Link to="/signup">
-                                <SignUp>Sign Up</SignUp>
-                            </Link>
+                            <LogIn marginRight="0.75em" onClick={navigateToLogIn}>Log In</LogIn>
+                            <SignUp onClick={navigateToSignUp}>Sign Up</SignUp>
                         </Layout.FlexHorizontalLayout>
                     </Layout.FlexVerticalLayout>
                 </Layout.LeftAlignedLayout>
