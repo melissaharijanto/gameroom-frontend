@@ -10,14 +10,23 @@ const Button = styled.button`
     cursor: pointer;
 `
 const LogIn = styled(Button)<{marginRight: string}>`
-    background-image: linear-gradient(to right, ${Colors.MAGENTA100}, ${Colors.BLUE100});
+    background: linear-gradient(to right, ${Colors.MAGENTA100}, ${Colors.BLUE100});
     color: white;
-    margin-right: ${(props) => props.marginRight ? props.marginRight: "0em"}
-`
+    margin-right: ${(props) => props.marginRight ? props.marginRight: "0em"};
+    transition: opacity 0.3s;
 
+    :hover {
+        opacity: 0.65;
+    }
+`
 const SignUp = styled(Button)`
     background-color: ${Colors.YELLOW100};
     color: black;
+    transition: all 0.3s ease-in;
+
+    :hover {
+        background-color: ${Colors.YELLOW_ACCENT};
+    }
 `
 
 export { LogIn, SignUp };
