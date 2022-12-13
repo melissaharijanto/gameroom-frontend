@@ -1,6 +1,5 @@
 import CompleteLogo from '../resources/images/logos/complete-logo.png';
 import * as Colors from '../constants';
-import styled from 'styled-components';
 import { StyledBackgroundBeforeLogin } from "../components/Background";
 import { WhiteHorizontalLine } from "../components/HorizontalLine";
 import { BackToLandingPageText } from "../components/StyledLink";
