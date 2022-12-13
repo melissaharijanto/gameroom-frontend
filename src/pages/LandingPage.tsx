@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as Colors from '../constants';
+import * as Constants from '../constants';
 import Console from '../resources/images/logos/console-only.png';
 import Logo from '../resources/images/logos/colored-text.png';
 import { SignUp, LogIn } from '../components/Button';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const StyledText = styled.text`
     font-family: Metropolis-SemiBold;
     font-size: 3.5em;
-    color: ${Colors.WHITE100}
+    color: ${Constants.WHITE100}
 `
 
 const LandingPage = () => {

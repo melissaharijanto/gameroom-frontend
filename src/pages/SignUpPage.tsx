@@ -1,5 +1,5 @@
 import CompleteLogo from '../resources/images/logos/complete-logo.png';
-import * as Colors from '../constants';
+import * as Constants from '../constants';
 import { StyledBackgroundBeforeLogin } from "../components/Background";
 import { WhiteHorizontalLine } from "../components/HorizontalLine";
 import { BackToLandingPageText } from "../components/StyledLink";
@@ -22,7 +22,7 @@ const SignUpPage = () => {
             <WhiteHorizontalLine/>
             <HeadingWrapper>
                 <BoldText>Sign up to start</BoldText> 
-                <BoldText color={Colors.YELLOW100}> interacting</BoldText>
+                <BoldText color={Constants.YELLOW100}> interacting</BoldText>
                 <br/>
                 <BoldText> with your fellow gamers!</BoldText>
             </HeadingWrapper>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as Colors from '../constants';
+import * as Constants from '../constants';
 import { LeftAlignedFlex } from './Layout';
 
 
@@ -10,7 +10,7 @@ const TextCombiner = styled.text`
     padding-bottom: 0.25em;
 `
 const StyledLabel = styled.label`
-    color: ${(props) => props.color? props.color : Colors.YELLOW100};
+    color: ${(props) => props.color? props.color : Constants.YELLOW100};
     font-family: Metropolis-SemiBold;
     padding-top: 0.25em;
     padding-bottom: 0.25em;
@@ -27,7 +27,7 @@ const StyledInput= styled.input`
     border-radius: 10px;
 
     ::placeholder {
-        color: ${Colors.BLACK35};
+        color: ${Constants.BLACK35};
     }
 `
 
@@ -50,13 +50,13 @@ const SignUpForm = () => {
         <form>
             <LeftAlignedFlex direction="column">
                 <TextCombiner>
-                    <StyledLabel color={Colors.WHITE100}>What will your </StyledLabel>
+                    <StyledLabel color={Constants.WHITE100}>What will your </StyledLabel>
                     <StyledLabel>username </StyledLabel>
-                    <StyledLabel color={Colors.WHITE100}>be?</StyledLabel>
+                    <StyledLabel color={Constants.WHITE100}>be?</StyledLabel>
                 </TextCombiner>
                 <StyledInput required placeholder="Enter your username here."></StyledInput> 
                 <TextCombiner>
-                    <StyledLabel color={Colors.WHITE100}>Create a </StyledLabel>
+                    <StyledLabel color={Constants.WHITE100}>Create a </StyledLabel>
                     <StyledLabel>password.</StyledLabel>
                 </TextCombiner>
                 <StyledInput required placeholder="Enter your password here."></StyledInput>

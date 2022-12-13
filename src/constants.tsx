@@ -26,3 +26,6 @@ export const YELLOW65 = "#FFBD5965";
 export const YELLOW25 = "#FFBD5925";
 export const YELLOW_ACCENT= "#A97F3F"
 export const LIGHT_PURPLE100 = "#AC60E1";
+
+// BACKEND ENDPOINT
+export const API_ENDPOINT = "https://gameroom-api.onrender.com";

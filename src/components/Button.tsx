@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as Colors from '../constants';
+import * as Constants from '../constants';
 
 const Button = styled.button`
     font-family: Metropolis-SemiBold;
@@ -10,7 +10,7 @@ const Button = styled.button`
     cursor: pointer;
 `
 const LogIn = styled(Button)<{marginRight: string}>`
-    background: linear-gradient(to right, ${Colors.MAGENTA100}, ${Colors.BLUE100});
+    background: linear-gradient(to right, ${Constants.MAGENTA100}, ${Constants.BLUE100});
     color: white;
     margin-right: ${(props) => props.marginRight ? props.marginRight: "0em"};
     transition: opacity 0.3s;
@@ -20,12 +20,12 @@ const LogIn = styled(Button)<{marginRight: string}>`
     }
 `
 const SignUp = styled(Button)`
-    background-color: ${Colors.YELLOW100};
+    background-color: ${Constants.YELLOW100};
     color: black;
     transition: all 0.3s ease-in;
 
     :hover {
-        background-color: ${Colors.YELLOW_ACCENT};
+        background-color: ${Constants.YELLOW_ACCENT};
     }
 `
 

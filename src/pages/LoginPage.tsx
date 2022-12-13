@@ -1,6 +1,5 @@
 import Logo from '../resources/images/logos/complete-logo.png';
-import styled from 'styled-components';
-import * as Colors from '../constants';
+import * as Constants from '../constants';
 import { StyledBackgroundBeforeLogin } from '../components/Background';
 import { WhiteHorizontalLine } from '../components/HorizontalLine';
 import { BackToLandingPageText } from '../components/StyledLink';
@@ -23,7 +22,7 @@ const LoginPage = () => {
             <WhiteHorizontalLine/>
             <HeadingWrapper>
                 <BoldText>Log in to</BoldText> &nbsp;
-                <BoldText color={Colors.YELLOW100}>continue.</BoldText>
+                <BoldText color={Constants.YELLOW100}>continue.</BoldText>
             </HeadingWrapper>
             <LoginForm/>
             <br/>
