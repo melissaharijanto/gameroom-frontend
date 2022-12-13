@@ -6,7 +6,7 @@ import { WhiteHorizontalLine } from '../components/HorizontalLine';
 import { BackToLandingPageText } from '../components/StyledLink';
 import { LoginForm } from '../components/Forms';
 import { LogIn, SignUp } from '../components/Button';
-import { SmallConsoleLogo } from '../components/StyledLogo';
+import { SmallCompleteLogo } from '../components/StyledLogo';
 import { useNavigate } from 'react-router-dom';
 
 const StyledText = styled.text`
@@ -28,7 +28,7 @@ const LoginPage = () => {
 
     return (
         <StyledBackgroundBeforeLogin>
-            <SmallConsoleLogo src={Logo}/>
+            <SmallCompleteLogo src={Logo}/>
             <WhiteHorizontalLine/>
             <Heading>
                 <StyledText>Log in to</StyledText> &nbsp;
@@ -43,7 +43,7 @@ const LoginPage = () => {
             <br/>
             <SignUp onClick={navigateToSignUp}>Sign Up</SignUp>
             <br/>
-            <BackToLandingPageText href="/">&#129040; Back</BackToLandingPageText>
+            <BackToLandingPageText href="/">&#129040; Landing Page</BackToLandingPageText>
         </StyledBackgroundBeforeLogin>
     )
 }

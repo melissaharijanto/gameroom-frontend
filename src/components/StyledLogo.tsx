@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SmallConsoleLogo = styled.img`
+export const SmallCompleteLogo = styled.img`
     width: 10%;
     height: auto;
 `
