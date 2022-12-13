@@ -7,6 +7,7 @@ import { BackToLandingPageText } from '../components/StyledLink';
 import { LoginForm } from '../components/Forms';
 import { LogIn, SignUp } from '../components/Button';
 import { SmallConsoleLogo } from '../components/StyledLogo';
+import { useNavigate } from 'react-router-dom';
 
 const StyledText = styled.text`
     font-family: Metropolis-Bold;
@@ -19,6 +20,12 @@ const Heading = styled.text`
 `
 
 const LoginPage = () => {
+    const navigation = useNavigate();
+
+    const navigateToSignUp = () => {
+        navigation("/signup");
+    }
+
     return (
         <StyledBackgroundBeforeLogin>
             <SmallConsoleLogo src={Logo}/>
@@ -34,7 +41,7 @@ const LoginPage = () => {
             <WhiteHorizontalLine/>
             <StyledText>Don't have an account?</StyledText>
             <br/>
-            <SignUp>Sign Up</SignUp>
+            <SignUp onClick={navigateToSignUp}>Sign Up</SignUp>
             <br/>
             <BackToLandingPageText href="/">&#129040; Back</BackToLandingPageText>
         </StyledBackgroundBeforeLogin>
