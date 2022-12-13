@@ -2,8 +2,15 @@ import styled from 'styled-components';
 import * as Colors from '../constants';
 import { LeftAlignedFlex } from './Layout';
 
+
+/**
+ * Wrapper to keep two different text components in one line.
+ */
+const TextCombiner = styled.text`
+    padding-bottom: 0.25em;
+`
 const StyledLabel = styled.label`
-    color: ${Colors.YELLOW100};
+    color: ${(props) => props.color? props.color : Colors.YELLOW100};
     font-family: Metropolis-SemiBold;
     padding-top: 0.25em;
     padding-bottom: 0.25em;
@@ -38,4 +45,25 @@ const LoginForm = () => {
     )
 }
 
-export { LoginForm };
+const SignUpForm = () => {
+    return (
+        <form>
+            <LeftAlignedFlex direction="column">
+                <TextCombiner>
+                    <StyledLabel color={Colors.WHITE100}>What will your </StyledLabel>
+                    <StyledLabel>username </StyledLabel>
+                    <StyledLabel color={Colors.WHITE100}>be?</StyledLabel>
+                </TextCombiner>
+                <StyledInput required placeholder="Enter your username here."></StyledInput> 
+                <TextCombiner>
+                    <StyledLabel color={Colors.WHITE100}>Create a </StyledLabel>
+                    <StyledLabel>password.</StyledLabel>
+                </TextCombiner>
+                <StyledInput required placeholder="Enter your password here."></StyledInput>
+            </LeftAlignedFlex>
+        </form>  
+        
+    )
+}
+
+export { LoginForm, SignUpForm };
