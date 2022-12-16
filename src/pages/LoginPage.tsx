@@ -4,7 +4,7 @@ import { StyledBackgroundBeforeLogin } from '../components/Background';
 import { WhiteHorizontalLine } from '../components/HorizontalLine';
 import { BackToLandingPageText } from '../components/StyledLink';
 import { LoginForm } from '../components/Forms';
-import { LogIn, SignUp } from '../components/Button';
+import { SignUp } from '../components/Button';
 import { SmallCompleteLogo } from '../components/StyledLogo';
 import { useNavigate } from 'react-router-dom';
 import { BoldText, HeadingWrapper } from '../components/StyledText';
