@@ -5,7 +5,7 @@ import { WhiteHorizontalLine } from "../components/HorizontalLine";
 import { BackToLandingPageText } from "../components/StyledLink";
 import { SmallCompleteLogo } from "../components/StyledLogo";
 import { SignUpForm } from '../components/Forms';
-import { LogIn, SignUp } from '../components/Button';
+import { LogIn } from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { BoldText, HeadingWrapper } from '../components/StyledText';
 
@@ -27,8 +27,6 @@ const SignUpPage = () => {
                 <BoldText> with your fellow gamers!</BoldText>
             </HeadingWrapper>
             <SignUpForm/>
-            <br/>
-            <SignUp>Sign Up</SignUp>
             <br/>
             <WhiteHorizontalLine/>
             <BoldText>Have an account?</BoldText>

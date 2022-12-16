@@ -26,8 +26,6 @@ const LoginPage = () => {
             </HeadingWrapper>
             <LoginForm/>
             <br/>
-            <LogIn marginRight="0em">Log In</LogIn>
-            <br/>
             <WhiteHorizontalLine/>
             <BoldText>Don't have an account?</BoldText>
             <br/>

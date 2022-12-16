@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import * as Constants from '../constants';
-import { LeftAlignedFlex } from './Layout';
-
+import { CenterAlignedFlex, LeftAlignedFlex } from './Layout';
+import { LogIn, SignUp } from './Button';
+import axios from 'axios';
 
 /**
  * Wrapper to keep two different text components in one line.
@@ -32,37 +34,128 @@ const StyledInput= styled.input`
 `
 
 const LoginForm = () => {
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    });
+
+    /**
+     * Handles the change of text in the input.
+     * @param e The event that is triggered from entering the text.
+     * Credit: https://stackoverflow.com/questions/54150783/react-hooks-usestate-with-object
+     */
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setUser(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = () => {
+        axios.post(Constants.API_ENDPOINT + "/login", user)
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
     return (
-        <form>
-            <LeftAlignedFlex direction="column">
-                <StyledLabel>Username</StyledLabel>
-                <StyledInput required placeholder="Enter your username here."></StyledInput> 
-                <StyledLabel>Password</StyledLabel>
-                <StyledInput required placeholder="Enter your password here."></StyledInput>
-            </LeftAlignedFlex>
-        </form>  
+        <div>
+            <form>
+                <LeftAlignedFlex direction="column">
+                    <StyledLabel>Username</StyledLabel>
+                    <StyledInput 
+                        required 
+                        placeholder="Enter your username here." 
+                        value={user.username}
+                        onChange={handleChange}
+                        name="username"
+                    /> 
+                    <StyledLabel>Password</StyledLabel>
+                    <StyledInput
+                        required 
+                        type="password"
+                        placeholder="Enter your password here."
+                        value={user.password}
+                        onChange={handleChange}
+                        name="password"
+                    />
+                </LeftAlignedFlex>
+            </form>  
+            <br/>
+            <CenterAlignedFlex direction="column">
+                <LogIn marginRight="0em" onClick={handleSubmit}>Log In</LogIn>
+            </CenterAlignedFlex>
+        </div>
         
     )
 }
 
 const SignUpForm = () => {
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    });
+
+    /**
+     * Handles the change of text in the input.
+     * @param e The event that is triggered from entering the text.
+     * Credit: https://stackoverflow.com/questions/54150783/react-hooks-usestate-with-object
+     */
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        setUser(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const handleSubmit = () => {
+        axios.post(Constants.API_ENDPOINT + "/signup", user)
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
     return (
-        <form>
-            <LeftAlignedFlex direction="column">
-                <TextCombiner>
-                    <StyledLabel color={Constants.WHITE100}>What will your </StyledLabel>
-                    <StyledLabel>username </StyledLabel>
-                    <StyledLabel color={Constants.WHITE100}>be?</StyledLabel>
-                </TextCombiner>
-                <StyledInput required placeholder="Enter your username here."></StyledInput> 
-                <TextCombiner>
-                    <StyledLabel color={Constants.WHITE100}>Create a </StyledLabel>
-                    <StyledLabel>password.</StyledLabel>
-                </TextCombiner>
-                <StyledInput required placeholder="Enter your password here."></StyledInput>
-            </LeftAlignedFlex>
-        </form>  
-        
+        <div>
+            <form>
+                <LeftAlignedFlex direction="column">
+                    <TextCombiner>
+                        <StyledLabel color={Constants.WHITE100}>What will your </StyledLabel>
+                        <StyledLabel>username </StyledLabel>
+                        <StyledLabel color={Constants.WHITE100}>be?</StyledLabel>
+                    </TextCombiner>
+                    <StyledInput 
+                        required 
+                        placeholder="Enter your username here."
+                        value={user.username}
+                        onChange={handleChange}
+                        name="username"
+                    />
+                    <TextCombiner>
+                        <StyledLabel color={Constants.WHITE100}>Create a </StyledLabel>
+                        <StyledLabel>password.</StyledLabel>
+                    </TextCombiner>
+                    <StyledInput 
+                        required 
+                        placeholder="Enter your password here."
+                        type="password"
+                        value={user.password}
+                        onChange={handleChange}
+                        name="password"
+                    />
+                </LeftAlignedFlex>
+            </form>
+            <br/>
+            <CenterAlignedFlex direction="column">
+                <SignUp onClick={handleSubmit}>Sign Up</SignUp>
+            </CenterAlignedFlex>  
+        </div>
     )
 }
 
