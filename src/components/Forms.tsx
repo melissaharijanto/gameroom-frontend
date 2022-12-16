@@ -4,6 +4,7 @@ import * as Constants from '../constants';
 import { CenterAlignedFlex, LeftAlignedFlex } from './Layout';
 import { LogIn, SignUp } from './Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Wrapper to keep two different text components in one line.
@@ -39,6 +40,8 @@ const LoginForm = () => {
         password: ""
     });
 
+    const navigate = useNavigate();
+
     /**
      * Handles the change of text in the input.
      * @param e The event that is triggered from entering the text.
@@ -55,7 +58,12 @@ const LoginForm = () => {
     const handleSubmit = () => {
         axios.post(Constants.API_ENDPOINT + "/login", user)
             .then((response) => {
-                console.log(response);
+                alert("You have successfully logged in!");
+                navigate('/dashboard', {
+                    state: {
+                        user: user,
+                    },
+                })
             }).catch((error) => {
                 console.log(error);
             })
@@ -95,29 +103,45 @@ const LoginForm = () => {
 
 const SignUpForm = () => {
     const [user, setUser] = useState({
-        username: "",
-        password: ""
+        user: {
+            username: "",
+            password: ""
+        }
     });
 
-    /**
-     * Handles the change of text in the input.
-     * @param e The event that is triggered from entering the text.
-     * Credit: https://stackoverflow.com/questions/54150783/react-hooks-usestate-with-object
-     */
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
+    const navigate = useNavigate();
+
+    const handleUsernameChange = (e: any) => {
         setUser(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+            ...prevState, 
+            user: {
+                username: e.target.value,
+                password: prevState.user.password
+            }
+        }))
     }
 
+    const handlePasswordChange = (e: any) => {
+        setUser(prevState => ({
+            ...prevState, 
+            user: {
+                username: prevState.user.username,
+                password: e.target.value,
+            }
+        }))
+    }
+    
     const handleSubmit = () => {
         axios.post(Constants.API_ENDPOINT + "/signup", user)
             .then((response) => {
-                console.log(response);
+                alert("You have successfully signed up!");
+                navigate('/dashboard', {
+                    state: {
+                        user: user.user,
+                    },
+                })
             }).catch((error) => {
-                console.log(error);
+                console.log(error.response.data);
             })
     }
 
@@ -133,8 +157,8 @@ const SignUpForm = () => {
                     <StyledInput 
                         required 
                         placeholder="Enter your username here."
-                        value={user.username}
-                        onChange={handleChange}
+                        value={user.user.username}
+                        onChange={handleUsernameChange}
                         name="username"
                     />
                     <TextCombiner>
@@ -145,8 +169,8 @@ const SignUpForm = () => {
                         required 
                         placeholder="Enter your password here."
                         type="password"
-                        value={user.password}
-                        onChange={handleChange}
+                        value={user.user.password}
+                        onChange={handlePasswordChange}
                         name="password"
                     />
                 </LeftAlignedFlex>
