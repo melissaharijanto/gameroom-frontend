@@ -47,11 +47,11 @@ const RightAlignedFlex = styled.div`
     align-items: center;
 `
 
-const CenterAlignedFlex = styled.div<{direction: string}>`
+const CenterAlignedFlex = styled.div<{direction: string | null}>`
     display: flex;
-    flex-direction: ${(props) => props.direction? props.direction : "row"}
     justify-items: center;
     align-items: center;
+    flex-direction: ${(props) => props.direction? props.direction : "row"};
 `
 
 export {
