@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { BlackBackground } from "../components/Background";
+import NavigationBar from "../components/NavigationBar";
+import * as Constants from "../constants";
 
 const DashboardPage = () => {
     const location = useLocation();
@@ -11,6 +15,7 @@ const DashboardPage = () => {
         axios.get('https://gameroom-api.onrender.com/authentication', {
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             }
         })
             .then((response) => {
@@ -20,10 +25,16 @@ const DashboardPage = () => {
             })
     }, [])
 
+    const StyledText = styled.text`
+        color: ${Constants.WHITE100};
+        font-family: Metropolis-Bold;
+    `
+
     return (
-        <div>
-            <text>{user.username}</text>
-        </div>
+        <BlackBackground>
+            <NavigationBar/>
+            <StyledText>hello, @{user.username}.</StyledText>
+        </BlackBackground>
     );
 }
 
