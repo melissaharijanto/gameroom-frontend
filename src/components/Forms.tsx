@@ -58,6 +58,7 @@ const LoginForm = () => {
     const handleSubmit = () => {
         axios.post(Constants.API_ENDPOINT + "/login", user)
             .then((response) => {
+                console.log(response);
                 alert("You have successfully logged in!");
                 navigate('/dashboard', {
                     state: {

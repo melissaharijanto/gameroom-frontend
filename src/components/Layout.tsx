@@ -54,6 +54,11 @@ const CenterAlignedFlex = styled.div<{direction: string}>`
     flex-direction: ${(props) => props.direction? props.direction : "row"};
 `
 
+const VerticallyCenterAlignedFlex = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
 export {
     DefaultLayout, 
     LeftAlignedLayout, 
@@ -63,5 +68,6 @@ export {
     FlexHorizontalLayout,
     LeftAlignedFlex,
     RightAlignedFlex,
-    CenterAlignedFlex
+    CenterAlignedFlex,
+    VerticallyCenterAlignedFlex
 };
