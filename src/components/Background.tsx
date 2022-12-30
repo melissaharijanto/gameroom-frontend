@@ -13,5 +13,9 @@ const StyledBackgroundBeforeLogin = styled(DefaultLayout)`
     justify-content: center;
     align-items: center;
 `
-
-export {StyledBackgroundBeforeLogin};
+const BlackBackground = styled.div`
+    background-color: ${Constants.BLACK100};
+    width: 100vw;
+    height: 100vh;
+`
+export { StyledBackgroundBeforeLogin, BlackBackground };

@@ -12,7 +12,7 @@ function App() {
         <Route path="/" index element={<LandingPage />}/>
         <Route path="login" element={<LoginPage />}/>
         <Route path="signup" element={<SignUpPage />}/>
-        <Route path="dashboard" element={<DashboardPage/>}/>
+        <Route path="dashboard" element={<DashboardPage />}/>
       </Routes>
     </BrowserRouter>
   );
