@@ -23,23 +23,17 @@ const SignUp = styled(Button)`
     background-color: ${Constants.YELLOW100};
     color: black;
     transition: all 0.3s ease-in;
-    padding: 0.75em 1em 0.75em 1em !important;
     :hover {
         background-color: ${Constants.YELLOW_ACCENT};
     }
 `
 
-const LogOut = styled.button`
-    font-family: Metropolis-SemiBold;
-    font-size: 1.25em;
-    padding: 0.5em 3em 0.5em 3em;
-    border: 0px solid;
-    border-radius: 50px;
-    cursor: pointer;
+const LogOut = styled(Button)`
+    padding: 0.75em 3em 0.75em 3em !important;
+    font-size: 1em !important;
     background-color: ${Constants.YELLOW100};
     color: black;
     transition: all 0.3s ease-in;
-    display: block;
     float: right;
     margin-right: 1vw;
     margin-top: 0.75vw;
