@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { BlackBackground } from "../components/Background";
 import NavigationBar from "../components/NavigationBar";
 import * as Constants from "../constants";
+import GameCommunity from "../components/GameCommunity";
 
 const StyledDiv = styled.div`
     padding-left: 2vw;
@@ -41,6 +42,9 @@ const DashboardPage = () => {
                 <StyledText>Welcome, </StyledText>
                 <StyledText color={Constants.YELLOW100}>@{user}</StyledText>
                 <StyledText>.</StyledText>
+            </StyledDiv>
+            <StyledDiv>
+                <GameCommunity></GameCommunity>
             </StyledDiv>
         </BlackBackground>
     );
