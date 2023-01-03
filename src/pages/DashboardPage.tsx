@@ -13,7 +13,7 @@ const DashboardPage = () => {
     const [user, setUser] = useState("");
 
     useEffect(() => {
-        axios.get('https://gameroom-backend.onrender.com/current_user', {
+        axios.get(Constants.API_ENDPOINT + '/current_user', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
