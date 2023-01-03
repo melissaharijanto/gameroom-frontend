@@ -56,7 +56,7 @@ const CenterAlignedFlex = styled.div<{direction: string}>`
 
 const VerticallyCenterAlignedFlex = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 `
 
 export {
