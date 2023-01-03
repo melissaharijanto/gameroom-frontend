@@ -5,10 +5,16 @@ import { BlackBackground } from "../components/Background";
 import NavigationBar from "../components/NavigationBar";
 import * as Constants from "../constants";
 
-const StyledText = styled.text`
-    color: ${Constants.WHITE100};
-    font-family: Metropolis-Bold;
+const StyledDiv = styled.div`
+    padding-left: 2vw;
+    padding-top: 2vw;
 `
+const StyledText = styled.text`
+    color: ${(props) => props.color || Constants.WHITE100};
+    font-family: Metropolis-ExtraBold;
+    font-size: 2.5em;
+`
+
 const DashboardPage = () => {
     const [user, setUser] = useState("");
 
@@ -31,7 +37,11 @@ const DashboardPage = () => {
     return (
         <BlackBackground>
             <NavigationBar/>
-            <StyledText>hello, @{user}.</StyledText>
+            <StyledDiv>
+                <StyledText>Welcome, </StyledText>
+                <StyledText color={Constants.YELLOW100}>@{user}</StyledText>
+                <StyledText>.</StyledText>
+            </StyledDiv>
         </BlackBackground>
     );
 }
