@@ -1,39 +1,37 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BlackBackground } from "../components/Background";
 import NavigationBar from "../components/NavigationBar";
 import * as Constants from "../constants";
 
+const StyledText = styled.text`
+    color: ${Constants.WHITE100};
+    font-family: Metropolis-Bold;
+`
 const DashboardPage = () => {
-    const location = useLocation();
-
-    let user = location.state.user;
+    const [user, setUser] = useState("");
 
     useEffect(() => {
-        axios.get('https://gameroom-api.onrender.com/authentication', {
+        axios.get('https://gameroom-backend.onrender.com/current_user', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
             }
         })
             .then((response) => {
                 console.log(response);
+                setUser(response.data.username);
             }).catch((error) => {
                 console.log(error.response);
             })
-    }, [])
-
-    const StyledText = styled.text`
-        color: ${Constants.WHITE100};
-        font-family: Metropolis-Bold;
-    `
+    }, []);
 
     return (
         <BlackBackground>
             <NavigationBar/>
-            <StyledText>hello, @{user.username}.</StyledText>
+            <StyledText>hello, @{user}.</StyledText>
         </BlackBackground>
     );
 }

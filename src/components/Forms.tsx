@@ -60,11 +60,8 @@ const LoginForm = () => {
             .then((response) => {
                 console.log(response);
                 alert("You have successfully logged in!");
-                navigate('/dashboard', {
-                    state: {
-                        user: user,
-                    },
-                })
+                navigate('/dashboard')
+                sessionStorage.setItem("gameroom", response.data.token);
             }).catch((error) => {
                 console.log(error);
             })
@@ -136,13 +133,10 @@ const SignUpForm = () => {
         axios.post(Constants.API_ENDPOINT + "/signup", user)
             .then((response) => {
                 alert("You have successfully signed up!");
-                navigate('/dashboard', {
-                    state: {
-                        user: user.user,
-                    },
-                })
+                navigate('/dashboard')
+                sessionStorage.setItem("gameroom", response.data.token);
             }).catch((error) => {
-                console.log(error.response.data);
+                console.log(error.response);
             })
     }
 

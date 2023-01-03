@@ -1,5 +1,4 @@
 import './App.css';
-import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
@@ -17,8 +16,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(<App />);
 
 export default App;
