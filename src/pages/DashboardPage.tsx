@@ -33,6 +33,7 @@ const DashboardPage = () => {
 
     const [games, setGames] = useState<GameCommunity[]>([]);
 
+    const username = JSON.parse(sessionStorage.getItem("user") || "").username;
     /**
      * Shuffles the array with the Fisher-Yates algorithm.
      * From https://sebhastian.com/fisher-yates-shuffle-javascript/
@@ -74,7 +75,7 @@ const DashboardPage = () => {
             <NavigationBar/>
             <StyledDiv>
                 <StyledText>Welcome, </StyledText>
-                <StyledText color={Constants.YELLOW100}>@{auth?.user.username}</StyledText>
+                <StyledText color={Constants.YELLOW100}>@{username}</StyledText>
                 <StyledText>.</StyledText>
             </StyledDiv>
             <StyledGrid>
