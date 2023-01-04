@@ -20,7 +20,7 @@ function App() {
                         </ProtectedRoute>
                         }
                     />
-                    <Route path="*" element={<LandingPage/>}/>
+                    <Route element={<LandingPage/>}/>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
