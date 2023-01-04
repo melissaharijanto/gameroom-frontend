@@ -29,7 +29,7 @@ const StyledWhiteText = styled.img`
     margin-bottom: auto;
     padding: 10px 1px;
     width: auto;
-    height: 3svw;
+    height: 3vw;
 `
 
 const StyledHomeIcon = styled.a`
