@@ -8,17 +8,17 @@ const pickRandomColor = () => {
     return colorArray[finalNumber];
 }
 const ImageWrapper = styled.button`
-        display: inline-block;
-        position: relative;
-        border: none;
-        width: 28vw;
-        height: 21vw;
-        border-radius: 25px;
-        cursor: pointer;
-    `
+    display: inline-block;
+    position: relative;
+    border: none;
+    width: 30vw;
+    height: 22.5vw;
+    border-radius: 25px;
+    cursor: pointer;
+`
 
 const StyledImage = styled.img`        
-    width: 28vw;
+    width: 30vw;
     height: auto;        
     display: block;
     border-radius: 25px;
@@ -33,10 +33,14 @@ const ColoredOverlay = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    height: 21vw;
-    width: 28vw;
+    height: 22.5vw;
+    width: 30vw;
     border-radius: 25px;
     z-index: 2;
+    transition: background 2s ease-in;
+    :hover {
+        background: linear-gradient(#FFFFFF00, ${Constants.BLACK100})
+    }
 `
 
 const BottomLeftText = styled.text`
@@ -52,12 +56,12 @@ const BottomLeftText = styled.text`
     z-index: 3;
 `
 
-const GameCommunityContainer = ({title}: any, image_url: string) => {
+const GameCommunityContainer = ({ game } : any) => {
     return (
-    <ImageWrapper>
-        <StyledImage src={image_url}/>
+    <ImageWrapper onClick = {() => {alert("yas")}}>
+        <StyledImage src={game.image_url}/>
         <ColoredOverlay/>
-        <BottomLeftText>{title}</BottomLeftText>
+        <BottomLeftText>{game.title}</BottomLeftText>
     </ImageWrapper>
     )
 }
