@@ -5,6 +5,7 @@ import { CenterAlignedFlex, LeftAlignedFlex } from './Layout';
 import { LogIn, SignUp } from './Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../compiler/context/Authentication';
 
 /**
  * Wrapper to keep two different text components in one line.
@@ -35,6 +36,7 @@ const StyledInput= styled.input`
 `
 
 const LoginForm = () => {
+    const auth = useAuth();
     const [user, setUser] = useState({
         username: "",
         password: ""
@@ -60,8 +62,8 @@ const LoginForm = () => {
             .then((response) => {
                 console.log(response);
                 alert("You have successfully logged in!");
+                auth?.login(response.data.token, response.data.user);
                 navigate('/dashboard')
-                sessionStorage.setItem("gameroom", response.data.token);
             }).catch((error) => {
                 console.log(error);
             })
@@ -100,6 +102,7 @@ const LoginForm = () => {
 }
 
 const SignUpForm = () => {
+    const auth = useAuth();
     const [user, setUser] = useState({
         user: {
             username: "",
@@ -133,8 +136,8 @@ const SignUpForm = () => {
         axios.post(Constants.API_ENDPOINT + "/signup", user)
             .then((response) => {
                 alert("You have successfully signed up!");
+                auth?.login(response.data.token, response.data.user);
                 navigate('/dashboard')
-                sessionStorage.setItem("gameroom", response.data.token);
             }).catch((error) => {
                 console.log(error.response);
             })

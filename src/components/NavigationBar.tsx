@@ -4,6 +4,8 @@ import Console from '../resources/images/logos/console-only.png';
 import WhiteTextLogo from '../resources/images/logos/white-text.png';
 import { LogOut } from './Button';
 import { Home } from '@mui/icons-material';
+import { useAuth } from '../compiler/context/Authentication';
+import { useNavigate } from 'react-router-dom';
 
 const StyledNavBar = styled.div`
     overflow: hidden;
@@ -62,11 +64,19 @@ const StyledSearchBar = styled.input`
     border: none;
 `
 const NavigationBar = () => {
+    const auth = useAuth();
+
+    const navigate = useNavigate();
+
+    const logOut = () => {
+        auth?.logout();
+        navigate("/");
+    }
     return (
         <StyledNavBar>
             <StyledConsole src={Console}/>
             <StyledWhiteText src={WhiteTextLogo}/>
-            <LogOut>Log Out</LogOut>
+            <LogOut onClick={logOut}>Log Out</LogOut>
             <StyledHomeIcon><Home sx={{fontSize: "2.5em"}}/></StyledHomeIcon>
             <StyledSearchBar type="text" placeholder="Search.."/>
         </StyledNavBar>
