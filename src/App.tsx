@@ -4,17 +4,26 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import DashboardPage from './pages/DashboardPage';
+import { AuthProvider } from './compiler/context/Authentication';
+import ProtectedRoute from './components/ProtectedRoute';
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" index element={<LandingPage />}/>
-        <Route path="login" element={<LoginPage />}/>
-        <Route path="signup" element={<SignUpPage />}/>
-        <Route path="dashboard" element={<DashboardPage />}/>
-        <Route path="*" element={<LandingPage/>}/>
-      </Routes>
-    </BrowserRouter>
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" index element={<LandingPage />}/>
+                    <Route path="login" element={<LoginPage />}/>
+                    <Route path="signup" element={<SignUpPage />}/>
+                    <Route path="dashboard" element={
+                        <ProtectedRoute>
+                            <DashboardPage />
+                        </ProtectedRoute>
+                        }
+                    />
+                    <Route path="*" element={<LandingPage/>}/>
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
   );
 }
 
