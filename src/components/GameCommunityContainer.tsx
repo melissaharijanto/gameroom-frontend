@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { GameCommunity } from '../compiler/interface/GameCommunity';
 import * as Constants from '../constants';
 
 const pickRandomColor = () => {
@@ -56,9 +58,14 @@ const BottomLeftText = styled.text`
     z-index: 3;
 `
 
-const GameCommunityContainer = ({ game } : any) => {
+const GameCommunityContainer = ({ game } : { game: GameCommunity }) => {
+    const navigate = useNavigate();
+    const navigateToCommunityPage = () => {
+        navigate(`/community/${game.id}`)
+    }
+
     return (
-    <ImageWrapper onClick = {() => {alert("yas")}}>
+    <ImageWrapper onClick = {() => navigateToCommunityPage()}>
         <StyledImage src={game.image_url}/>
         <ColoredOverlay/>
         <BottomLeftText>{game.title}</BottomLeftText>

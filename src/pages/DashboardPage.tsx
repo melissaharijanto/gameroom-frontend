@@ -6,7 +6,7 @@ import NavigationBar from "../components/NavigationBar";
 import * as Constants from "../constants";
 import GameCommunityContainer from "../components/GameCommunityContainer";
 import { GameCommunity } from "../compiler/interface/GameCommunity";
-import { useAuth } from "../compiler/context/Authentication";
+// import { CenterAlignedFlex } from "../components/Layout";
 
 const StyledDiv = styled.div`
     padding-left: 2vw;
@@ -22,14 +22,33 @@ const StyledGrid = styled(StyledDiv)`
     align-items: center;
 `
 
-const StyledText = styled.text`
+const StyledHeading = styled.text`
     color: ${(props) => props.color || Constants.WHITE100};
     font-family: Metropolis-ExtraBold;
     font-size: 2.5em;
 `
 
+const StyledText = styled.text`
+    color: ${(props) => props.color || Constants.WHITE100};
+    font-family: Metropolis-SemiBold;
+    font-size: 1.25em;
+    line-height: 1.15;
+`
+
+const CenterAlignedFlex = styled.div<{direction?: string}>`
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: ${(props) => props.direction? props.direction : "row"};
+`
+
+const StyledHorizontalLine = styled.hr`
+    width: 20vw;
+    height: 1px;
+    background-color: ${Constants.WHITE100};
+`
+
 const DashboardPage = () => {
-    const auth = useAuth();
 
     const [games, setGames] = useState<GameCommunity[]>([]);
 
@@ -74,15 +93,33 @@ const DashboardPage = () => {
         <BlackBackground>
             <NavigationBar/>
             <StyledDiv>
-                <StyledText>Welcome, </StyledText>
-                <StyledText color={Constants.YELLOW100}>@{username}</StyledText>
-                <StyledText>.</StyledText>
+                <StyledHeading>Welcome, </StyledHeading>
+                <StyledHeading color={Constants.YELLOW100}>@{username}</StyledHeading>
+                <StyledHeading>.</StyledHeading>
             </StyledDiv>
+            <br/>
+            <br/>
+            <CenterAlignedFlex direction="column">
+                    <StyledText>You have not followed any communities yet.</StyledText>
+                    <text>
+                        <StyledText>Perhaps you would be </StyledText>
+                        <StyledText color={Constants.MAGENTA100}>interested</StyledText>
+                        <StyledText> in some of our</StyledText>
+                    </text>
+                    <text>
+                        <StyledText color={Constants.BLUE100}>popular communities</StyledText>
+                        <StyledText> :</StyledText>
+                    </text>
+                    <br/>
+                    <StyledHorizontalLine/>
+            </CenterAlignedFlex>
+            
             <StyledGrid>
                 {games.map(game => {
                     return (
                         <div>
-                            <GameCommunityContainer game={game} />
+                            <GameCommunityContainer game={game}
+                            />
                         </div>
                     )
                 })}

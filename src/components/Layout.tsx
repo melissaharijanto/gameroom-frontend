@@ -47,7 +47,7 @@ const RightAlignedFlex = styled.div`
     align-items: center;
 `
 
-const CenterAlignedFlex = styled.div<{direction: string}>`
+const CenterAlignedFlex = styled.div<{direction?: string}>`
     display: flex;
     justify-items: center;
     align-items: center;
