@@ -9,4 +9,15 @@ export interface GameCommunity {
     icon_url: string;
     created_at: string;
     updated_at: string;
+    followers: number[];
+}
+
+export const GameCommunityInitialValue : GameCommunity = {
+    id: 0,
+    title: "",
+    image_url: "",
+    icon_url: "",
+    created_at: "",
+    updated_at: "",
+    followers: [],
 }
