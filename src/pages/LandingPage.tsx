@@ -6,7 +6,7 @@ import { SignUp, LogIn } from '../components/Button';
 import * as Layout from '../components/Layout';
 import { LargeColoredTextLogo, LargeConsoleLogo } from '../components/StyledLogo';
 import { StyledBackgroundBeforeLogin } from '../components/Background';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import RedirectToDashboardRoute from '../components/RedirectToDashboardRoute';
 
 const StyledText = styled.text`
