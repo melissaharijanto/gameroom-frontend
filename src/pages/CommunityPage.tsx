@@ -5,11 +5,8 @@ import { useParams } from "react-router-dom";
 import { GameCommunity, GameCommunityInitialValue } from "../compiler/interface/GameCommunity";
 import { BlackBackground } from "../components/Background";
 import { API_ENDPOINT } from "../constants";
-
-const WhiteText = styled.span`
-    font-family: Metropolis-SemiBold;
-    color: white;
-`
+import NavigationBar from "../components/NavigationBar";
+import CommunityHeader from "../components/CommunityHeader";
 
 const CommunityPage = () => {
     let { id } = useParams();
@@ -26,13 +23,8 @@ const CommunityPage = () => {
 
     return (
         <BlackBackground>
-            <WhiteText>{gameCommunity.id}</WhiteText>
-            <br></br>
-            <WhiteText>{gameCommunity.title}</WhiteText>
-            <br></br>
-            <WhiteText>{gameCommunity.created_at}</WhiteText>
-            <br></br>
-            <WhiteText>{gameCommunity.followers.length}</WhiteText>
+            <NavigationBar/>
+            <CommunityHeader game={gameCommunity}/>
         </BlackBackground>
     )
 }
