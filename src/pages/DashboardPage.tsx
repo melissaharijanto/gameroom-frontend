@@ -6,7 +6,6 @@ import NavigationBar from "../components/NavigationBar";
 import * as Constants from "../constants";
 import GameCommunityContainer from "../components/GameCommunityContainer";
 import { GameCommunity } from "../compiler/interface/GameCommunity";
-// import { CenterAlignedFlex } from "../components/Layout";
 
 const StyledDiv = styled.div`
     padding-left: 2vw;
@@ -48,11 +47,27 @@ const StyledHorizontalLine = styled.hr`
     background-color: ${Constants.WHITE100};
 `
 
+const CommunitiesYouFollow = styled.span`
+    font-family: Metropolis-Bold;
+    font-size: 2.25em;
+    color: ${(props) => props.color? props.color : Constants.WHITE100}
+`
+
+const HorizontalLine = styled.hr`
+    background-color: ${Constants.YELLOW100};
+    border: none;
+    height: 4px;
+    width: 27.5vw;
+    margin-left: 2vw;
+    margin-top: 0.75vw;
+`
+
 const DashboardPage = () => {
 
     const [games, setGames] = useState<GameCommunity[]>([]);
-
+    const [userFollowing, setUserFollowing] = useState<GameCommunity[]>([]);
     const username = JSON.parse(sessionStorage.getItem("user") || "").username;
+
     /**
      * Shuffles the array with the Fisher-Yates algorithm.
      * From https://sebhastian.com/fisher-yates-shuffle-javascript/
@@ -78,16 +93,104 @@ const DashboardPage = () => {
         }).then((response) => {
             var arr = response.data as GameCommunity[];
             var shuffled = fisherYatesShuffle(arr);
-            setGames(shuffled.splice(0, 9));
+            console.log(userFollowing.length);
+            if (userFollowing.length > 0 && userFollowing.length <= 3) {
+                var alreadyFollowedId = 0;
+                for (let i = 0; i < userFollowing.length; i++) {
+                    alreadyFollowedId = userFollowing[i].id;
+                    shuffled = shuffled.filter(game => game.id !== alreadyFollowedId);
+                }
+                console.log(shuffled);
+                setGames(shuffled.splice(0, 6));
+            } else {
+                setGames(shuffled.splice(0, 9));
+            }
         }).catch((error) => {
             console.log(error.response);
         })
     }
 
+    const fetchUserFollowing = () => {
+        axios.get(Constants.API_ENDPOINT + '/follow', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+            }
+        }).then((response) => {
+            setUserFollowing(response.data);
+        }).catch(error => console.log(error));
+    }
+
+    const NoFollowingTextComponent = () => {
+        return (
+            <CenterAlignedFlex direction="column">
+                    <StyledText>You have not followed any communities yet.</StyledText>
+                    <span>
+                        <StyledText>Perhaps you would be </StyledText>
+                        <StyledText color={Constants.MAGENTA100}>interested</StyledText>
+                        <StyledText> in some of our</StyledText>
+                    </span>
+                    <span>
+                        <StyledText color={Constants.BLUE100}>popular communities</StyledText>
+                        <StyledText> :</StyledText>
+                    </span>
+                    <br/>
+                    <StyledHorizontalLine/>
+                </CenterAlignedFlex> 
+        )
+    }
+
+    const UserFollowingComponent = () => {
+        return (
+            <div>
+                <StyledDiv>
+                    <CommunitiesYouFollow>Communities you </CommunitiesYouFollow>
+                    <CommunitiesYouFollow color={Constants.MAGENTA100}>follow</CommunitiesYouFollow>
+                </StyledDiv>
+                <HorizontalLine/>
+                <StyledGrid>
+                    {userFollowing.map(game => {
+                        return (
+                            <div>
+                                <GameCommunityContainer 
+                                    key={game.id}
+                                    game={game}
+                                />
+                            </div>
+                        )
+                    })}
+                </StyledGrid>
+            </div>
+        )
+    }
+
+    const RecommendedCommunitiesComponent = () => {
+        return (
+            <StyledGrid>
+                {games.map(game => {
+                    return (
+                        <div>
+                            <GameCommunityContainer 
+                                key={game.id}
+                                game={game}
+                            />
+                        </div>
+                    )
+                })}
+            </StyledGrid> 
+        )
+    }
+
     useEffect(() => {
-        fetchGames();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchUserFollowing();
     }, []);
+
+    useEffect(() => {
+        if (userFollowing.length <= 3) {
+            fetchGames();
+        }
+    }, [userFollowing]);
     
     return (
         <BlackBackground>
@@ -99,31 +202,27 @@ const DashboardPage = () => {
             </StyledDiv>
             <br/>
             <br/>
-            <CenterAlignedFlex direction="column">
-                    <StyledText>You have not followed any communities yet.</StyledText>
-                    <text>
-                        <StyledText>Perhaps you would be </StyledText>
-                        <StyledText color={Constants.MAGENTA100}>interested</StyledText>
-                        <StyledText> in some of our</StyledText>
-                    </text>
-                    <text>
-                        <StyledText color={Constants.BLUE100}>popular communities</StyledText>
-                        <StyledText> :</StyledText>
-                    </text>
-                    <br/>
-                    <StyledHorizontalLine/>
-            </CenterAlignedFlex>
+            { userFollowing.length === 0
+                ? <NoFollowingTextComponent/>
+                : null
+            }
             
-            <StyledGrid>
-                {games.map(game => {
-                    return (
-                        <div>
-                            <GameCommunityContainer game={game}
-                            />
-                        </div>
-                    )
-                })}
-            </StyledGrid>
+            { userFollowing.length === 0 
+                ? <RecommendedCommunitiesComponent/> 
+                : <UserFollowingComponent/> }
+
+            { userFollowing.length > 0 && userFollowing.length <= 3 
+            ?
+            <div>
+                <StyledDiv>
+                    <CommunitiesYouFollow>Recommended </CommunitiesYouFollow>
+                    <CommunitiesYouFollow color={Constants.BLUE100}>for you</CommunitiesYouFollow>
+                </StyledDiv>
+                <HorizontalLine/> 
+                <RecommendedCommunitiesComponent/>
+            </div>
+            : null
+            }
         </BlackBackground>
     );
 }
