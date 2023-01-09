@@ -10,6 +10,7 @@ export interface GameCommunity {
     created_at: string;
     updated_at: string;
     followers: number[];
+    posts: number[];
 }
 
 export const GameCommunityInitialValue : GameCommunity = {
@@ -20,4 +21,5 @@ export const GameCommunityInitialValue : GameCommunity = {
     created_at: "",
     updated_at: "",
     followers: [],
+    posts: []
 }
