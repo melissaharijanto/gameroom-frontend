@@ -50,6 +50,7 @@ const CreatePost = styled.button`
     border-radius: 50px;
     color: ${Constants.WHITE100};
     font-family: Metropolis-Bold;
+    font-size: 1.125em;
     float: right;
     padding: 0.5em 1.5em;
     transition: all 0.3s ease-in;
