@@ -43,4 +43,20 @@ const LogOut = styled(Button)`
     }
 `
 
-export { LogIn, SignUp, LogOut };
+const CreatePost = styled.button`
+    background-color: ${Constants.MAGENTA100};
+    border: 2px solid;
+    border-color: ${Constants.WHITE100};
+    border-radius: 50px;
+    color: ${Constants.WHITE100};
+    font-family: Metropolis-Bold;
+    float: right;
+    padding: 0.5em 1.5em;
+    transition: all 0.3s ease-in;
+
+    :hover {
+        background-color: ${Constants.MAGENTA_ACCENT};
+    }
+`
+
+export { LogIn, SignUp, LogOut, CreatePost };
