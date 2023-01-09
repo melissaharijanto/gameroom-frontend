@@ -45,7 +45,7 @@ const ColoredOverlay = styled.div`
     }
 `
 
-const BottomLeftText = styled.text`
+const BottomLeftText = styled.span`
     position: absolute;
     text-align: left;        
     bottom: 1.5vw;

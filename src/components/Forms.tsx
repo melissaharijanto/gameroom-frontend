@@ -10,7 +10,7 @@ import { useAuth } from '../compiler/context/Authentication';
 /**
  * Wrapper to keep two different text components in one line.
  */
-const TextCombiner = styled.text`
+const TextCombiner = styled.span`
     padding-bottom: 0.25em;
 `
 const StyledLabel = styled.label`

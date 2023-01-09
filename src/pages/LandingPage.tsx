@@ -9,7 +9,7 @@ import { StyledBackgroundBeforeLogin } from '../components/Background';
 import { useNavigate } from 'react-router-dom';
 import RedirectToDashboardRoute from '../components/RedirectToDashboardRoute';
 
-const StyledText = styled.text`
+const StyledText = styled.span`
     font-family: Metropolis-SemiBold;
     font-size: 3.5em;
     color: ${Constants.WHITE100}

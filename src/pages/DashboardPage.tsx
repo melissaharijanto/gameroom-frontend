@@ -21,13 +21,13 @@ const StyledGrid = styled(StyledDiv)`
     align-items: center;
 `
 
-const StyledHeading = styled.text`
+const StyledHeading = styled.span`
     color: ${(props) => props.color || Constants.WHITE100};
     font-family: Metropolis-ExtraBold;
     font-size: 2.5em;
 `
 
-const StyledText = styled.text`
+const StyledText = styled.span`
     color: ${(props) => props.color || Constants.WHITE100};
     font-family: Metropolis-SemiBold;
     font-size: 1.25em;
@@ -152,9 +152,8 @@ const DashboardPage = () => {
                 <StyledGrid>
                     {userFollowing.map(game => {
                         return (
-                            <div>
+                            <div key={game.id}>
                                 <GameCommunityContainer 
-                                    key={game.id}
                                     game={game}
                                 />
                             </div>
@@ -170,9 +169,8 @@ const DashboardPage = () => {
             <StyledGrid>
                 {games.map(game => {
                     return (
-                        <div>
+                        <div key={game.id}>
                             <GameCommunityContainer 
-                                key={game.id}
                                 game={game}
                             />
                         </div>
