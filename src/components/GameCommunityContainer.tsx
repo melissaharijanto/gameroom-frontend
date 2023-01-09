@@ -9,6 +9,7 @@ const pickRandomColor = () => {
     var finalNumber = Math.round(random_number * 3);
     return colorArray[finalNumber];
 }
+
 const ImageWrapper = styled.button`
     display: inline-block;
     position: relative;
@@ -59,6 +60,7 @@ const BottomLeftText = styled.span`
 `
 
 const GameCommunityContainer = ({ game } : { game: GameCommunity }) => {
+    
     const navigate = useNavigate();
     const navigateToCommunityPage = () => {
         navigate(`/community/${game.id}`)
