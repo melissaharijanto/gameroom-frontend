@@ -8,6 +8,7 @@ import { SignUp } from '../components/Button';
 import { SmallCompleteLogo } from '../components/StyledLogo';
 import { useNavigate } from 'react-router-dom';
 import { BoldText, HeadingWrapper } from '../components/StyledText';
+import RedirectToDashboardRoute from '../components/RedirectToDashboardRoute';
 
 const LoginPage = () => {
     const navigation = useNavigate();
@@ -17,22 +18,24 @@ const LoginPage = () => {
     }
 
     return (
-        <StyledBackgroundBeforeLogin>
-            <SmallCompleteLogo src={Logo}/>
-            <WhiteHorizontalLine/>
-            <HeadingWrapper>
-                <BoldText>Log in to</BoldText> &nbsp;
-                <BoldText color={Constants.YELLOW100}>continue.</BoldText>
-            </HeadingWrapper>
-            <LoginForm/>
-            <br/>
-            <WhiteHorizontalLine/>
-            <BoldText>Don't have an account?</BoldText>
-            <br/>
-            <SignUp onClick={navigateToSignUp}>Sign Up</SignUp>
-            <br/>
-            <BackToLandingPageText href="/">&#129040; Landing Page</BackToLandingPageText>
-        </StyledBackgroundBeforeLogin>
+        <RedirectToDashboardRoute>
+            <StyledBackgroundBeforeLogin>
+                <SmallCompleteLogo src={Logo}/>
+                <WhiteHorizontalLine/>
+                <HeadingWrapper>
+                    <BoldText>Log in to</BoldText> &nbsp;
+                    <BoldText color={Constants.YELLOW100}>continue.</BoldText>
+                </HeadingWrapper>
+                <LoginForm/>
+                <br/>
+                <WhiteHorizontalLine/>
+                <BoldText>Don't have an account?</BoldText>
+                <br/>
+                <SignUp onClick={navigateToSignUp}>Sign Up</SignUp>
+                <br/>
+                <BackToLandingPageText href="/">&#129040; Landing Page</BackToLandingPageText>
+            </StyledBackgroundBeforeLogin>
+        </RedirectToDashboardRoute>
     )
 }
 

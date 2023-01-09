@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { GameCommunity } from '../compiler/interface/GameCommunity';
 import * as Constants from '../constants';
 
 const pickRandomColor = () => {
@@ -7,6 +9,7 @@ const pickRandomColor = () => {
     var finalNumber = Math.round(random_number * 3);
     return colorArray[finalNumber];
 }
+
 const ImageWrapper = styled.button`
     display: inline-block;
     position: relative;
@@ -43,7 +46,7 @@ const ColoredOverlay = styled.div`
     }
 `
 
-const BottomLeftText = styled.text`
+const BottomLeftText = styled.span`
     position: absolute;
     text-align: left;        
     bottom: 1.5vw;
@@ -56,9 +59,15 @@ const BottomLeftText = styled.text`
     z-index: 3;
 `
 
-const GameCommunityContainer = ({ game } : any) => {
+const GameCommunityContainer = ({ game } : { game: GameCommunity }) => {
+    
+    const navigate = useNavigate();
+    const navigateToCommunityPage = () => {
+        navigate(`/community/${game.id}`)
+    }
+
     return (
-    <ImageWrapper onClick = {() => {alert("yas")}}>
+    <ImageWrapper onClick = {() => navigateToCommunityPage()}>
         <StyledImage src={game.image_url}/>
         <ColoredOverlay/>
         <BottomLeftText>{game.title}</BottomLeftText>

@@ -8,6 +8,7 @@ import { SignUpForm } from '../components/Forms';
 import { LogIn } from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 import { BoldText, HeadingWrapper } from '../components/StyledText';
+import RedirectToDashboardRoute from '../components/RedirectToDashboardRoute';
 
 const SignUpPage = () => {
     const navigation = useNavigate();
@@ -17,24 +18,26 @@ const SignUpPage = () => {
     }
     
     return (
-        <StyledBackgroundBeforeLogin>
-            <SmallCompleteLogo src={CompleteLogo}/>
-            <WhiteHorizontalLine/>
-            <HeadingWrapper>
-                <BoldText>Sign up to start</BoldText> 
-                <BoldText color={Constants.YELLOW100}> interacting</BoldText>
+        <RedirectToDashboardRoute>
+            <StyledBackgroundBeforeLogin>
+                <SmallCompleteLogo src={CompleteLogo}/>
+                <WhiteHorizontalLine/>
+                <HeadingWrapper>
+                    <BoldText>Sign up to start</BoldText> 
+                    <BoldText color={Constants.YELLOW100}> interacting</BoldText>
+                    <br/>
+                    <BoldText> with your fellow gamers!</BoldText>
+                </HeadingWrapper>
+                <SignUpForm/>
                 <br/>
-                <BoldText> with your fellow gamers!</BoldText>
-            </HeadingWrapper>
-            <SignUpForm/>
-            <br/>
-            <WhiteHorizontalLine/>
-            <BoldText>Have an account?</BoldText>
-            <br/>
-            <LogIn marginRight="0em" onClick={navigateToLogIn}>Log In</LogIn>
-            <br/>
-            <BackToLandingPageText href="/">&#129040; Landing Page</BackToLandingPageText>
-        </StyledBackgroundBeforeLogin>
+                <WhiteHorizontalLine/>
+                <BoldText>Have an account?</BoldText>
+                <br/>
+                <LogIn marginRight="0em" onClick={navigateToLogIn}>Log In</LogIn>
+                <br/>
+                <BackToLandingPageText href="/">&#129040; Landing Page</BackToLandingPageText>
+            </StyledBackgroundBeforeLogin>
+        </RedirectToDashboardRoute>
     )
 }
 

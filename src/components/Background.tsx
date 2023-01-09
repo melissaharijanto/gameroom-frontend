@@ -16,6 +16,7 @@ const StyledBackgroundBeforeLogin = styled(DefaultLayout)`
 const BlackBackground = styled.div`
     background-color: ${Constants.BLACK100};
     width: 100vw;
+    min-height: 100vh;
     padding-bottom: 5vh;
 `
 export { StyledBackgroundBeforeLogin, BlackBackground };

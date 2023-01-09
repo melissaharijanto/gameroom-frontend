@@ -77,7 +77,7 @@ const NavigationBar = () => {
             <StyledConsole src={Console}/>
             <StyledWhiteText src={WhiteTextLogo}/>
             <LogOut onClick={logOut}>Log Out</LogOut>
-            <StyledHomeIcon><Home sx={{fontSize: "2.5em"}}/></StyledHomeIcon>
+            <StyledHomeIcon href="/dashboard"><Home sx={{fontSize: "2.5em"}}/></StyledHomeIcon>
             <StyledSearchBar type="text" placeholder="Search.."/>
         </StyledNavBar>
     )

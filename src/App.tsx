@@ -6,6 +6,7 @@ import SignUpPage from './pages/SignUpPage';
 import DashboardPage from './pages/DashboardPage';
 import { AuthProvider } from './compiler/context/Authentication';
 import ProtectedRoute from './components/ProtectedRoute';
+import CommunityPage from './pages/CommunityPage';
 function App() {
     return (
         <AuthProvider>
@@ -20,6 +21,11 @@ function App() {
                         </ProtectedRoute>
                         }
                     />
+                    <Route path="community/:id" element={
+                        <ProtectedRoute>
+                            <CommunityPage/>
+                        </ProtectedRoute>
+                    }/>
                     <Route element={<LandingPage/>}/>
                 </Routes>
             </BrowserRouter>
