@@ -55,8 +55,23 @@ const PostComponent = ({ post } : { post: Post }) => {
         const day = dateObject.getDate();
         const hour = dateObject.getHours();
         const mins = dateObject.getMinutes();
-        const parsedDate = day + " " + Constants.MONTHS[month] + " " + year + ", " + hour + ":" + mins;
+        let minsInString = "";
+        if (mins < 10) {
+            minsInString = "0" + mins.toString();
+        } else {
+            minsInString = mins.toString();
+        }
+        const parsedDate = day + " " + Constants.MONTHS[month] + " " + year + ", " + hour + ":" + minsInString;
         return parsedDate;
+    }
+
+    const parseBody = (body: string) => {
+        if (body.length > 1150) {
+            let substring = body.substring(0, 1150);
+            return substring + '...';
+        } else {
+            return body;
+        }
     }
 
     return (
@@ -70,7 +85,7 @@ const PostComponent = ({ post } : { post: Post }) => {
                 </span>
             </TextDiv>
             <TextDiv>
-                <PostBody>{post.body}</PostBody>
+                <PostBody>{parseBody(post.body)}</PostBody>
             </TextDiv>
             <VerticallyCenterAlignedFlex>
                 <CommentIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
