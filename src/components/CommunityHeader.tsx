@@ -52,6 +52,7 @@ const FollowButton = styled.button`
     border-color: ${Constants.WHITE100};
     border-radius: 50px;
     color: ${Constants.WHITE100};
+    cursor: pointer !important;
     font-family: Metropolis-Bold;
     font-size: 1em;
     margin-top: 0.25vw;
@@ -71,6 +72,7 @@ const FollowedButton = styled.button`
     border-color: ${Constants.WHITE100};
     border-radius: 50px;
     color: ${Constants.WHITE100};
+    cursor: pointer;
     display: flex;
     font-family: Metropolis-Bold;
     font-size: 1em;

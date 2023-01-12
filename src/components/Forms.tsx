@@ -13,6 +13,7 @@ import { useAuth } from '../compiler/context/Authentication';
 const TextCombiner = styled.span`
     padding-bottom: 0.25em;
 `
+
 const StyledLabel = styled.label`
     color: ${(props) => props.color? props.color : Constants.YELLOW100};
     font-family: Metropolis-SemiBold;

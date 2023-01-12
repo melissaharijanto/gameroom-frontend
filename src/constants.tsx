@@ -5,7 +5,8 @@ export const BLACK35 = "#00000035";
 export const BLACK20 = "#00000020";
 export const WHITE100 = "#FFFFFF";
 export const WHITE50 = "#FFFFFF50";
-export const WHITE15 = "#FFFFF15";
+export const WHITE25 = "#FFFFFF25";
+export const WHITE15 = "#FFFFFF15";
 export const MAGENTA100 = "#FF2273";
 export const MAGENTA85 = "FF227385";
 export const MAGENTA75 = "FF227375";
@@ -29,3 +30,5 @@ export const LIGHT_PURPLE100 = "#AC60E1";
 
 // BACKEND ENDPOINT
 export const API_ENDPOINT = "https://gameroom-backend.onrender.com";
+
+export const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]

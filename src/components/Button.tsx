@@ -50,6 +50,7 @@ const CreatePost = styled.button`
     border-radius: 50px;
     color: ${Constants.WHITE100};
     font-family: Metropolis-Bold;
+    font-size: 1.125em;
     float: right;
     padding: 0.5em 1.5em;
     transition: all 0.3s ease-in;
@@ -59,4 +60,22 @@ const CreatePost = styled.button`
     }
 `
 
-export { LogIn, SignUp, LogOut, CreatePost };
+const BackButton = styled.button`
+    background: linear-gradient(${Constants.BLUE100}, ${Constants.PURPLE100});
+    border: none;
+    border-radius: 50px;
+    color: ${Constants.WHITE100};
+    cursor: pointer;
+    font-family: Metropolis-Bold;
+    font-size: 1.125em;
+    margin-top: 1em;
+    padding: 0.75em 0.75em;
+    transition: all 0.3s ease-in;
+    width: 85%;
+
+    :hover {
+        opacity: 0.5;
+    }
+`
+
+export { LogIn, SignUp, LogOut, CreatePost, BackButton };
