@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import * as Constants from '../constants';
 import CommentIcon from '@mui/icons-material/Comment';
 import { VerticallyCenterAlignedFlex } from './Layout';
+import { Post } from '../compiler/interface/Post';
 
 const PostDiv = styled.button`
     background: linear-gradient(${Constants.BLUE25}, ${Constants.BLUE75});
@@ -46,26 +47,34 @@ const CommentCount = styled(PostBody)`
     margin-left: 0.75em;
 `
 
-const PostComponent = () => {
+const PostComponent = ({ post } : { post: Post }) => {
+    const parseDate = (date: string) => {
+        const dateObject = new Date(date);
+        const year = dateObject.getFullYear();
+        const month = dateObject.getMonth();
+        const day = dateObject.getDate();
+        const hour = dateObject.getHours();
+        const mins = dateObject.getMinutes();
+        const parsedDate = day + " " + Constants.MONTHS[month] + " " + year + ", " + hour + ":" + mins;
+        return parsedDate;
+    }
+
     return (
         <PostDiv>
-            <PostTitle>HELLOOOO</PostTitle>
+            <PostTitle>{post.title}</PostTitle>
             <TextDiv>
                 <span>
                     <PostedBy>Posted by </PostedBy>
-                    <PostedBy color={Constants.YELLOW100}>@johndoe </PostedBy>
-                    <PostedBy>on 31 December 2022, 20:00</PostedBy>
+                    <PostedBy color={Constants.YELLOW100}>@{post.username} </PostedBy>
+                    <PostedBy>on {parseDate(post.created_at)}</PostedBy>
                 </span>
             </TextDiv>
             <TextDiv>
-                <PostBody>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </PostBody>
+                <PostBody>{post.body}</PostBody>
             </TextDiv>
             <VerticallyCenterAlignedFlex>
                 <CommentIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
-                <CommentCount>0</CommentCount>
+                <CommentCount>{post.comments.length}</CommentCount>
             </VerticallyCenterAlignedFlex>
         </PostDiv>
     )

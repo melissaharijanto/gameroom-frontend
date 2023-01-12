@@ -29,3 +29,5 @@ export const LIGHT_PURPLE100 = "#AC60E1";
 
 // BACKEND ENDPOINT
 export const API_ENDPOINT = "https://gameroom-backend.onrender.com";
+
+export const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]

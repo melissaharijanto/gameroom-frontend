@@ -9,6 +9,7 @@ import NavigationBar from "../components/NavigationBar";
 import CommunityHeader from "../components/CommunityHeader";
 import { CreatePost } from "../components/Button";
 import PostComponent from "../components/PostComponent";
+import { Post, PostInitialState } from "../compiler/interface/Post";
 
 const ForumWall = styled.span`
     color: ${Constants.WHITE100};
@@ -26,6 +27,11 @@ const PostDiv = styled.div`
     padding-right: 7vw;
 `
 
+const IndividualPostContainer = styled.div`
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+`
+
 const HorizontalLine = styled.hr`
     background-color: ${Constants.MAGENTA100};
     border: none;
@@ -36,6 +42,7 @@ const HorizontalLine = styled.hr`
 
 const CommunityPage = () => {
     let { id } = useParams();
+    const [posts, setPosts] = useState<Post[]>([]);
     const [gameCommunity, setGameCommunity] = useState<GameCommunity>(GameCommunityInitialValue);
     const navigate = useNavigate();
 
@@ -45,6 +52,20 @@ const CommunityPage = () => {
             .catch(error => console.log(error));
     }
 
+    const fetchPosts = () => {
+        axios.post(Constants.API_ENDPOINT + "/community_posts", {game_community_id: id}, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+            }
+        }).then((response) => {
+                setPosts(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
     const navigateToCreatePost = () => {
         navigate(`/community/${id}/posts/new`)
     }
@@ -52,6 +73,10 @@ const CommunityPage = () => {
     useEffect(() => {
         fetchGameCommunityData();
     }, [])
+
+    useEffect(() => {
+        fetchPosts();
+    }, [gameCommunity])
 
     return (
         <BlackBackground>
@@ -67,7 +92,13 @@ const CommunityPage = () => {
             </Div>
             <br/>
             <PostDiv>
-                <PostComponent/>
+                {posts.map(post => {
+                    return (
+                        <IndividualPostContainer>
+                            <PostComponent post={post}/>
+                        </IndividualPostContainer>
+                    )
+                })}
             </PostDiv>
         </BlackBackground>
     )
