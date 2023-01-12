@@ -1,7 +1,7 @@
 import axios from "axios";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GameCommunity, GameCommunityInitialValue } from "../compiler/interface/GameCommunity";
 import { BlackBackground } from "../components/Background";
 import * as Constants from "../constants";
@@ -37,12 +37,18 @@ const HorizontalLine = styled.hr`
 const CommunityPage = () => {
     let { id } = useParams();
     const [gameCommunity, setGameCommunity] = useState<GameCommunity>(GameCommunityInitialValue);
+    const navigate = useNavigate();
 
     const fetchGameCommunityData = () => {
         axios.get(Constants.API_ENDPOINT + `/game_communities/${id}`)
             .then(response => setGameCommunity(response.data))
             .catch(error => console.log(error));
     }
+
+    const navigateToCreatePost = () => {
+        navigate(`/community/${id}/posts/new`)
+    }
+
     useEffect(() => {
         fetchGameCommunityData();
     }, [])
@@ -55,7 +61,7 @@ const CommunityPage = () => {
             <br/>
             <br/>
             <Div>
-                <CreatePost>+ Create New Post</CreatePost>
+                <CreatePost onClick={navigateToCreatePost}>+ Create New Post</CreatePost>
                 <ForumWall>Forum Wall</ForumWall>
                 <HorizontalLine/>
             </Div>

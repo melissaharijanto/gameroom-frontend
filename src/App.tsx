@@ -7,6 +7,8 @@ import DashboardPage from './pages/DashboardPage';
 import { AuthProvider } from './compiler/context/Authentication';
 import ProtectedRoute from './components/ProtectedRoute';
 import CommunityPage from './pages/CommunityPage';
+import CreatePostPage from './pages/CreatePostPage';
+
 function App() {
     return (
         <AuthProvider>
@@ -21,11 +23,20 @@ function App() {
                         </ProtectedRoute>
                         }
                     />
-                    <Route path="community/:id" element={
-                        <ProtectedRoute>
-                            <CommunityPage/>
-                        </ProtectedRoute>
-                    }/>
+                    <Route path="community/:id">
+                        <Route index element={
+                            <ProtectedRoute>
+                                <CommunityPage/>
+                            </ProtectedRoute>
+                        }/>
+                        <Route path="posts">
+                            <Route path="new" element={
+                                <ProtectedRoute>
+                                    <CreatePostPage/>
+                                </ProtectedRoute>
+                            }/>
+                        </Route>
+                    </Route>
                     <Route element={<LandingPage/>}/>
                 </Routes>
             </BrowserRouter>
