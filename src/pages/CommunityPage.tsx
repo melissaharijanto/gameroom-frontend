@@ -8,6 +8,7 @@ import * as Constants from "../constants";
 import NavigationBar from "../components/NavigationBar";
 import CommunityHeader from "../components/CommunityHeader";
 import { CreatePost } from "../components/Button";
+import PostComponent from "../components/PostComponent";
 
 const ForumWall = styled.span`
     color: ${Constants.WHITE100};
@@ -17,6 +18,11 @@ const ForumWall = styled.span`
 
 const Div = styled.div`
     padding-left: 7vw;
+    padding-right: 7vw;
+`
+
+const PostDiv = styled.div`
+    padding-left: 10vw;
     padding-right: 7vw;
 `
 
@@ -53,6 +59,10 @@ const CommunityPage = () => {
                 <ForumWall>Forum Wall</ForumWall>
                 <HorizontalLine/>
             </Div>
+            <br/>
+            <PostDiv>
+                <PostComponent/>
+            </PostDiv>
         </BlackBackground>
     )
 }
