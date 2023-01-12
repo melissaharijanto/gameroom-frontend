@@ -9,7 +9,8 @@ import NavigationBar from "../components/NavigationBar";
 import CommunityHeader from "../components/CommunityHeader";
 import { CreatePost } from "../components/Button";
 import PostComponent from "../components/PostComponent";
-import { Post, PostInitialState } from "../compiler/interface/Post";
+import { Post } from "../compiler/interface/Post";
+import { CenterAlignedFlex } from "../components/Layout";
 
 const ForumWall = styled.span`
     color: ${Constants.WHITE100};
@@ -38,6 +39,33 @@ const HorizontalLine = styled.hr`
     height: 2px;
     margin: 0.5vw 0;
     width: 15vw;
+`
+
+const NoPostsText = styled.span<{underline?: string}>`
+    color: ${props => props.color? props.color : Constants.WHITE100};
+    font-family: Metropolis-SemiBold;
+    font-size: 2em;
+    line-height: 1.15;
+    text-decoration: ${props => props.underline? "underline" : null}
+`
+
+const NoPostsLink = styled.a`
+    color: ${props => props.color? props.color : Constants.WHITE100};
+    cursor: pointer;
+    font-family: Metropolis-SemiBold;
+    font-size: 2em;
+    line-height: 1.15;
+    text-decoration: underline;
+
+    :hover {
+        color: ${Constants.MAGENTA100};
+    }
+`
+
+const TextWrapper = styled(CenterAlignedFlex)`
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    flex-direction: column;
 `
 
 const CommunityPage = () => {
@@ -92,7 +120,18 @@ const CommunityPage = () => {
             </Div>
             <br/>
             <PostDiv>
-                {posts.map(post => {
+                {posts.length === 0
+                ? (
+                    <TextWrapper>
+                        <NoPostsText>No posts to see here.</NoPostsText>
+                        <span>
+                            <NoPostsText>Start a discussion by </NoPostsText>
+                            <NoPostsLink color={Constants.YELLOW100} onClick={navigateToCreatePost}>creating a post</NoPostsLink>
+                            <NoPostsText>.</NoPostsText>
+                        </span>
+                    </TextWrapper>
+                )
+                : posts.map(post => {
                     return (
                         <IndividualPostContainer>
                             <PostComponent post={post}/>
