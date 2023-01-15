@@ -107,16 +107,7 @@ const CommunityHeader = ({game}: {game: GameCommunity}) => {
     const [followers, setFollowers] = useState<Array<Number>>(game.followers);
     const postFollowRequest = JSON.parse(`{ "id": ${game.id} }`);
 
-    const setNewFollowers = () => {
-        axios.get(Constants.API_ENDPOINT + `/game_communities/${game.id}`)
-            .then((response) => {
-                console.log(response.data.followers)
-                setFollowers(response.data.followers);
-            })
-            .catch(error => console.log(error));
-    }
-
-    const setLikedStatus = () => {
+    const setFollowedStatus = () => {
         axios.post(Constants.API_ENDPOINT + "/follow", postFollowRequest, {
             headers: {
                 'Content-Type': 'application/json',
@@ -126,7 +117,7 @@ const CommunityHeader = ({game}: {game: GameCommunity}) => {
         }).then((response) => {
             console.log(response.data);
             setFollowed(!followed);
-            setNewFollowers();
+            setFollowers(response.data);
         })
           .catch((error) => {
                 console.log(error);
@@ -134,10 +125,10 @@ const CommunityHeader = ({game}: {game: GameCommunity}) => {
     }
 
     useEffect(() => {
+        setFollowers(game.followers);
         if (game.followers.includes(user.id)) {
             setFollowed(true);
         }
-        setNewFollowers();
     }, [game])
 
     return (
@@ -150,11 +141,11 @@ const CommunityHeader = ({game}: {game: GameCommunity}) => {
                 <FlexHorizontalLayout>
                     { 
                     followed
-                    ? <FollowedButton onClick={setLikedStatus}>
+                    ? <FollowedButton onClick={setFollowedStatus}>
                         Followed
                         <CheckCircleOutlineIcon sx={{fontSize: "1em", marginLeft: "0.25em"}}/>
                     </FollowedButton>
-                    : <FollowButton onClick={setLikedStatus}>Follow</FollowButton>
+                    : <FollowButton onClick={setFollowedStatus}>Follow</FollowButton>
                     }
                     <FollowerAmount>
                         <PersonIcon sx={{fontSize: "1em", marginRight:"0.25vw"}}/>
