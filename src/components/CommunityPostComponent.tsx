@@ -96,7 +96,9 @@ const SubmitButton = styled.button`
 const CommunityPostComponent = ({post} : {post : Post}) => {
 
     const { id } = useParams();
+    const user = JSON.parse(sessionStorage.getItem("user")!);
     const [liked, setLiked] = useState<Boolean>(false);
+    const [likesArray, setLikesArray] = useState<number[]>(post.likes);
     const [showModal, setShowModal] = useState<Boolean>(false);
     const [newComment, setNewComment] = useState<string>("");
     const [editMode, setEditMode] = useState<Boolean>(false);
@@ -158,8 +160,8 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         axios.post(Constants.API_ENDPOINT + `/comments`, {
             comment: {
                 body: newComment,
-                username: JSON.parse(sessionStorage.getItem("user")!).username,
-                user_id: JSON.parse(sessionStorage.getItem("user")!).id,
+                username: user.username,
+                user_id: user.id,
                 post_id: post.id,
             }
         }, {
@@ -174,13 +176,32 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         }).catch(error => console.log(error));
     }
 
+    const handleLikes = () => {
+        axios.post(Constants.API_ENDPOINT + `/post_likes`, {
+            id: post.id,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+            }
+        }).then(response => {
+            setLiked(!liked)
+            setLikesArray(response.data)
+            console.log(response.data)
+        }).catch(error => console.log(error.response.data));
+    }
+
     useEffect(() => {
-        
-    }, [])
+        setLikesArray(post.likes);
+        if (likesArray.includes(user.id)) {
+            setLiked(true);
+        }
+    }, [post])
 
     return (
         <CommunityPostWrapper>
-            { post.user_id === JSON.parse(sessionStorage.getItem("user")!).id
+            { post.user_id === user.id
                 ? (
                 <>
                     <Button float="right" onClick={() => {setShowModal(true)}}>
@@ -204,13 +225,13 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
             <TextDiv>
                 <PostBody>{post.body}</PostBody>
             </TextDiv>
-            <Button onClick={() => {setLiked(!liked)}}>
+            <Button onClick={handleLikes}>
                 <VerticallyCenter>
-                    { liked
+                    { likesArray.includes(user.id)
                         ? <ThumbUpIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
                         : <ThumbUpOutlinedIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
                     }
-                    <WhiteText>{post.likes.length}</WhiteText>    
+                    <WhiteText>{likesArray.length}</WhiteText>    
                 </VerticallyCenter>
             </Button>
             <InputDiv>

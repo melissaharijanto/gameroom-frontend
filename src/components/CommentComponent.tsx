@@ -38,8 +38,11 @@ const CommentBodyDiv = styled.div`
 `
 
 const CommentComponent = ({ commentId } : { commentId : number }) => {
+
+    const user = JSON.parse(sessionStorage.getItem("user")!);
     const [comment, setComment] = useState<Comment>(CommentInitialState);
     const [liked, setLiked] = useState<Boolean>(false);
+    const [likesArray, setLikesArray] = useState<number[]>([]);
     const [showModal, setShowModal] = useState<Boolean>(false);
 
     const parseDate = (date: string) => {
@@ -97,14 +100,37 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         cancel: cancelShowModal,
     }
 
+    const handleLikes = () => {
+        axios.post(Constants.API_ENDPOINT + `/comment_likes`, {
+            id: commentId,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+            }
+        }).then(response => {
+            setLiked(!liked)
+            setLikesArray(response.data)
+            console.log(response.data)
+        }).catch(error => console.log(error.response.data));
+    }
+
     useEffect(() => {
         fetchComment();
     }, [])
 
+    useEffect(() => {
+        setLikesArray(comment.likes);
+        if (comment.likes.includes(user.id)) {
+            setLiked(true);
+        }
+    }, [comment])
+
     return (
         <CommentWrapper>
             {showModal? <Modal functions={modalFunctions}/> : null}
-            { comment.user_id === JSON.parse(sessionStorage.getItem("user")!).id
+            { comment.user_id === user.id
                 ? (
                 <>
                     <Button float="right" onClick={() => setShowModal(true)}>
@@ -124,13 +150,13 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
             <CommentBodyDiv>
                 <CommentBody>{comment.body}</CommentBody>
             </CommentBodyDiv>
-            <Button onClick={() => {setLiked(!liked)}}>
+            <Button onClick={handleLikes}>
                 <VerticallyCenter>
                     { liked
                         ? <ThumbUpIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
                         : <ThumbUpOutlinedIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
                     }
-                    <WhiteText>{comment.likes.length}</WhiteText>    
+                    <WhiteText>{likesArray.length}</WhiteText>    
                 </VerticallyCenter>
             </Button>
         </CommentWrapper>
