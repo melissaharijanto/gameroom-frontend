@@ -98,7 +98,9 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
     const { id } = useParams();
     const [liked, setLiked] = useState<Boolean>(false);
     const [showModal, setShowModal] = useState<Boolean>(false);
+    const [newComment, setNewComment] = useState<string>("");
     const [editMode, setEditMode] = useState<Boolean>(false);
+
     const navigate = useNavigate();
     
     const parseDate = (date: string) => {
@@ -148,6 +150,30 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         cancel: cancelShowModal,
     }
 
+    const handleNewCommentChange = (e : any) => {
+        setNewComment(e.target.value);
+    }
+
+    const submitNewComment = () => {
+        axios.post(Constants.API_ENDPOINT + `/comments`, {
+            comment: {
+                body: newComment,
+                username: JSON.parse(sessionStorage.getItem("user")!).username,
+                user_id: JSON.parse(sessionStorage.getItem("user")!).id,
+                post_id: post.id,
+            }
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+            }
+        }).then(response => {
+            setNewComment("");
+            window.location.reload();
+        }).catch(error => console.log(error));
+    }
+
     useEffect(() => {
         
     }, [])
@@ -188,8 +214,11 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
                 </VerticallyCenter>
             </Button>
             <InputDiv>
-            <CommentInput placeholder="Reply to this post here..."/>
-            <SubmitButton>Submit</SubmitButton>
+                <CommentInput 
+                    placeholder="Reply to this post here..."
+                    onChange={handleNewCommentChange}
+                />
+                <SubmitButton onClick={submitNewComment}>Submit</SubmitButton>
             </InputDiv>
             {post.comments.map(comment => {
                 return (
