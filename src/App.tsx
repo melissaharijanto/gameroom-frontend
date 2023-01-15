@@ -8,6 +8,7 @@ import { AuthProvider } from './compiler/context/Authentication';
 import ProtectedRoute from './components/ProtectedRoute';
 import CommunityPage from './pages/CommunityPage';
 import CreatePostPage from './pages/CreatePostPage';
+import CommunityPostPage from './pages/CommunityPostPage';
 
 function App() {
     return (
@@ -33,6 +34,11 @@ function App() {
                             <Route path="new" element={
                                 <ProtectedRoute>
                                     <CreatePostPage/>
+                                </ProtectedRoute>
+                            }/>
+                            <Route path=":postid" element={
+                                <ProtectedRoute>
+                                    <CommunityPostPage/>
                                 </ProtectedRoute>
                             }/>
                         </Route>
