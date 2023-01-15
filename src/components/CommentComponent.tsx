@@ -29,7 +29,7 @@ const CommentBody = styled.span`
     color: ${Constants.WHITE100};
     font-family: Metropolis-Medium;
     font-size: 1em;
-    line-height: 1.25;
+    line-height: 1.5;
 `
 
 const CommentBodyDiv = styled.div`
