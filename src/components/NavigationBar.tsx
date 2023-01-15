@@ -62,6 +62,10 @@ const StyledSearchBar = styled.input`
     width: 20vw;
     border-radius: 5px;
     border: none;
+
+    :focus {
+        outline: none;
+    }
 `
 const NavigationBar = () => {
     const auth = useAuth();

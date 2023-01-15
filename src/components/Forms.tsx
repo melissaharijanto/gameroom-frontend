@@ -34,6 +34,10 @@ const StyledInput= styled.input`
     ::placeholder {
         color: ${Constants.BLACK35};
     }
+    
+    :focus {
+        outline: none;
+    }
 `
 
 const LoginForm = () => {
