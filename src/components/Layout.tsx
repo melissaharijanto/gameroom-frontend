@@ -34,11 +34,12 @@ const FlexHorizontalLayout = styled.div`
     flex-direction: row;
 `
 
-const LeftAlignedFlex = styled.div<{direction: string}>`
+const LeftAlignedFlex = styled.div<{direction?: string, width?: string}>`
     display: flex;
     justify-items: center;
     align-items: flex-start;
-    flex-direction: ${(props) => props.direction? props.direction : "row"}
+    flex-direction: ${(props) => props.direction? props.direction : "row"};
+    width: ${(props) => props.width? props.width : "auto"};
 `
 
 const RightAlignedFlex = styled.div`
