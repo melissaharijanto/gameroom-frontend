@@ -37,7 +37,7 @@ const TableDiv70 = styled.div`
 const PostContainer = styled.div`
     background: linear-gradient(${Constants.BLUE25}, ${Constants.BLUE85});
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -49,30 +49,38 @@ const PostContainer = styled.div`
 const TitleInput = styled.input`
     background-color: ${Constants.WHITE25};
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     color: ${Constants.WHITE100};
     font-family: Metropolis-RegularItalic;
     font-size: 1em;
     margin-bottom: 1em;
-    padding: 0.75em;
+    padding: 0.875em;
     position: relative;
     width: 100%;
+
+    :focus {
+        outline: none;
+    }
 `
 
 const BodyInput = styled.textarea`
     background-color: ${Constants.WHITE25};
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
     color: ${Constants.WHITE100};
     font-family: Metropolis-RegularItalic;
     font-size: 1em;
     min-height: 60vh;
     justify-content: center;
     line-height: 1.5;
-    padding: 0.75em;
+    padding: 0.875em;
     position: relative;
     resize: none;
     width: 100%;
+
+    :focus {
+        outline: none;
+    }
 `
 
 const Div = styled.div`
@@ -120,7 +128,7 @@ const CreatePostPage = () => {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
             }
-        }).then(response => console.log(response))
+        }).then(response => navigate(`/community/${id}/posts/${response.data.id}`))
         .catch(error => console.log(error));
     }
 

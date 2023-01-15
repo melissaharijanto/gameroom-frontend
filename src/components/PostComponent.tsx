@@ -3,6 +3,7 @@ import * as Constants from '../constants';
 import CommentIcon from '@mui/icons-material/Comment';
 import { VerticallyCenterAlignedFlex } from './Layout';
 import { Post } from '../compiler/interface/Post';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const PostDiv = styled.button`
     background: linear-gradient(${Constants.BLUE25}, ${Constants.BLUE75});
@@ -19,28 +20,29 @@ const PostDiv = styled.button`
     }
 `
 
-const PostTitle = styled.span`
+export const PostTitle = styled.span`
     color: ${Constants.WHITE100};
     font-family: Metropolis-Bold;
     font-size: 3em;
 `
 
-const PostedBy = styled.span`
+export const PostedBy = styled.span`
     color: ${props => props.color? props.color: Constants.WHITE100};
     font-family: Metropolis-SemiBold;
     font-size: 1.25em;
 `
 
-const TextDiv = styled.div`
+export const TextDiv = styled.div`
     margin-bottom: 1em;
     margin-top: 1em;
 `
 
-const PostBody = styled.span`
+export const PostBody = styled.span`
     color: ${Constants.WHITE100};
     font-family: Metropolis-Medium;
     font-size: 1em;
     line-height: 1.5;
+    white-space: pre-wrap;
 `
 
 const CommentCount = styled(PostBody)`
@@ -48,12 +50,21 @@ const CommentCount = styled(PostBody)`
 `
 
 const PostComponent = ({ post } : { post: Post }) => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const parseDate = (date: string) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
         const month = dateObject.getMonth();
         const day = dateObject.getDate();
         const hour = dateObject.getHours();
+        let hourInString = "";
+        if (hour < 10) {
+            hourInString = "0" + hour.toString();
+        }  else {
+            hourInString = hour.toString();
+        }
         const mins = dateObject.getMinutes();
         let minsInString = "";
         if (mins < 10) {
@@ -61,8 +72,12 @@ const PostComponent = ({ post } : { post: Post }) => {
         } else {
             minsInString = mins.toString();
         }
-        const parsedDate = day + " " + Constants.MONTHS[month] + " " + year + ", " + hour + ":" + minsInString;
+        const parsedDate = day + " " + Constants.MONTHS[month] + " " + year + ", " + hourInString + ":" + minsInString;
         return parsedDate;
+    }
+
+    const navigateToCommunityPostPage = () => {
+        navigate(`/community/${id}/posts/${post.id}`)
     }
 
     const parseBody = (body: string) => {
@@ -75,7 +90,7 @@ const PostComponent = ({ post } : { post: Post }) => {
     }
 
     return (
-        <PostDiv>
+        <PostDiv onClick={navigateToCommunityPostPage}>
             <PostTitle>{post.title}</PostTitle>
             <TextDiv>
                 <span>
