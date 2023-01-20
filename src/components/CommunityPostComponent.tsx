@@ -129,7 +129,7 @@ const BodyEditInput = styled.textarea`
 
 const SaveChangesButton = styled.button`
     background-color: ${Constants.BLUE100};
-    border: none;
+    border: solid 1px ${Constants.WHITE100};
     border-radius: 20px;
     color: ${Constants.WHITE100};
     cursor: pointer;
@@ -221,7 +221,7 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
     }
 
     const submitNewComment = () => {
-        if (newComment === "") {
+        if (newComment.trim() === "") {
             setShowEmptyCommentWarning(true);
         } else {
             axios.post(Constants.API_ENDPOINT + `/comments`, {
@@ -269,7 +269,7 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
     }
 
     const saveEditChanges = () => {
-        if (postBody === "" || postTitle === "") {
+        if (postBody.trim() === "" || postTitle.trim() === "") {
             setShowEmptyPostWarning(true);
         } else {
             axios.put(Constants.API_ENDPOINT + `/posts/${post.id}`, {
@@ -285,7 +285,7 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
                     'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
                 }
             }).then(response => window.location.reload())
-            .then(error => console.log(error));
+            .catch(error => console.log(error));
         }
     }
 
