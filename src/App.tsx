@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import CommunityPage from './pages/CommunityPage';
 import CreatePostPage from './pages/CreatePostPage';
 import CommunityPostPage from './pages/CommunityPostPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
     return (
@@ -43,6 +44,11 @@ function App() {
                             }/>
                         </Route>
                     </Route>
+                    <Route path="search/:keyword" element={
+                        <ProtectedRoute>
+                            <SearchPage/>
+                        </ProtectedRoute>
+                    }/>
                     <Route element={<LandingPage/>}/>
                 </Routes>
             </BrowserRouter>
