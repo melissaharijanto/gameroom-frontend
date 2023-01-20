@@ -88,13 +88,19 @@ const Div = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     margin-top: 1em;
+`
 
+const ErrorMessage = styled.span`
+    color: ${Constants.YELLOW100};
+    font-family: Metropolis-SemiBoldItalic;
+    font-size: 1em;
 `
 
 const CreatePostPage = () => {
     const [gameName, setGameName] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [postBody, setPostBody] = useState<string>("");
+    const [showErrorMessage, setShowErrorMessage] = useState<Boolean>(false);
 
     const navigate = useNavigate();
     const { id } = useParams();
@@ -114,22 +120,26 @@ const CreatePostPage = () => {
     }
 
     const publish = () => {
-        axios.post(Constants.API_ENDPOINT + "/posts", {
-            post: {
-                title: title,
-                body: postBody,
-                username: JSON.parse(sessionStorage.getItem('user')!).username,
-                user_id: JSON.parse(sessionStorage.getItem('user')!).id,
-                game_community_id: id
-            }
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
-            }
-        }).then(response => navigate(`/community/${id}/posts/${response.data.id}`))
-        .catch(error => console.log(error));
+        if (title.trim() === "" || postBody.trim() === "") {
+            setShowErrorMessage(true);
+        } else {
+            axios.post(Constants.API_ENDPOINT + "/posts", {
+                post: {
+                    title: title,
+                    body: postBody,
+                    username: JSON.parse(sessionStorage.getItem('user')!).username,
+                    user_id: JSON.parse(sessionStorage.getItem('user')!).id,
+                    game_community_id: id
+                }
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+                }
+            }).then(response => navigate(`/community/${id}/posts/${response.data.id}`))
+            .catch(error => console.log(error));
+        }
     }
 
     const displayCurrentlyWritingForMessage = () => {
@@ -162,6 +172,10 @@ const CreatePostPage = () => {
         fetchGameCommunity();
     }, [])
 
+    useEffect(() => {
+        setShowErrorMessage(false);
+    }, [title, postBody])
+
     return (
         <BlackBackground>
             <NavigationBar/>
@@ -177,6 +191,9 @@ const CreatePostPage = () => {
                             placeholder="What do you want to talk about?"
                             onChange={handlePostBodyChange}
                         />
+                        <Div>
+                            {showErrorMessage? <ErrorMessage>A post's title and body cannot be empty!</ErrorMessage> : null }
+                        </Div>
                         <Div>
                             <CreatePost onClick={publish}>Publish</CreatePost>
                         </Div>

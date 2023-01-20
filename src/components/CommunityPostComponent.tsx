@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Modal, { ModalType } from './Modal';
+import { CenterAlignedFlex} from './Layout';
 
 
 const CommunityPostWrapper = styled.div`
@@ -93,15 +94,78 @@ const SubmitButton = styled.button`
     }
 `
 
+const TitleEditInput = styled.input`
+    background-color: ${Constants.WHITE50};
+    border: none;
+    border-radius: 20px;
+    color: ${Constants.WHITE100};
+    font-family: Metropolis-Bold;
+    font-size: 2em;
+    padding: 0.5em;
+    width: 90%;
+
+    :focus {
+        outline: none;
+    }
+`
+
+const BodyEditInput = styled.textarea`
+    background-color: ${Constants.WHITE50};
+    border: none;
+    border-radius: 20px;
+    color: ${Constants.WHITE100};
+    font-family: Metropolis-Medium;
+    font-size: 1em;
+    height: 30vh;
+    line-height: 1.5;
+    padding: 0.875em;
+    resize: none;
+    width: 90%;
+
+    :focus {
+        outline: none;
+    }
+`
+
+const SaveChangesButton = styled.button`
+    background-color: ${Constants.BLUE100};
+    border: solid 1px ${Constants.WHITE100};
+    border-radius: 20px;
+    color: ${Constants.WHITE100};
+    cursor: pointer;
+    float: right;
+    font-family: Metropolis-SemiBold;
+    font-size: 1em;
+    padding: 0.75em;
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+    transition: all 0.3s ease-in;
+
+    :hover {
+        background-color: ${Constants.BLUE_ACCENT};
+    }
+`
+
+const EmptyWarning = styled.span`
+    color: ${Constants.YELLOW100};
+    font-family: Metropolis-SemiBoldItalic;
+    font-size: 1em;
+`
+
 const CommunityPostComponent = ({post} : {post : Post}) => {
 
     const { id } = useParams();
     const user = JSON.parse(sessionStorage.getItem("user")!);
+
     const [liked, setLiked] = useState<Boolean>(false);
     const [likesArray, setLikesArray] = useState<number[]>(post.likes);
     const [showModal, setShowModal] = useState<Boolean>(false);
     const [newComment, setNewComment] = useState<string>("");
     const [editMode, setEditMode] = useState<Boolean>(false);
+    const [postTitle, setPostTitle] = useState<string>("");
+    const [postBody, setPostBody] = useState<string>("");
+    const [showEmptyCommentWarning, setShowEmptyCommentWarning] = useState<Boolean>(false);
+    const [showEmptyPostWarning, setShowEmptyPostWarning] = useState<Boolean>(false);
 
     const navigate = useNavigate();
     
@@ -157,23 +221,27 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
     }
 
     const submitNewComment = () => {
-        axios.post(Constants.API_ENDPOINT + `/comments`, {
-            comment: {
-                body: newComment,
-                username: user.username,
-                user_id: user.id,
-                post_id: post.id,
-            }
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
-            }
-        }).then(response => {
-            setNewComment("");
-            window.location.reload();
-        }).catch(error => console.log(error));
+        if (newComment.trim() === "") {
+            setShowEmptyCommentWarning(true);
+        } else {
+            axios.post(Constants.API_ENDPOINT + `/comments`, {
+                comment: {
+                    body: newComment,
+                    username: user.username,
+                    user_id: user.id,
+                    post_id: post.id,
+                }
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+                }
+            }).then(response => {
+                setNewComment("");
+                window.location.reload();
+            }).catch(error => console.log(error));
+        }
     }
 
     const handleLikes = () => {
@@ -192,12 +260,58 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         }).catch(error => console.log(error.response.data));
     }
 
+    const handleTitleChange = (e: any) => {
+        setPostTitle(e.target.value);
+    }
+
+    const handleBodyChange = (e: any) => {
+        setPostBody(e.target.value)
+    }
+
+    const saveEditChanges = () => {
+        if (postBody.trim() === "" || postTitle.trim() === "") {
+            setShowEmptyPostWarning(true);
+        } else {
+            axios.put(Constants.API_ENDPOINT + `/posts/${post.id}`, {
+                title: postTitle,
+                body: postBody,
+                username: user.username,
+                user_id: user.id,
+                game_community_id: id
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem("gameroom")}`
+                }
+            }).then(response => window.location.reload())
+            .catch(error => console.log(error));
+        }
+    }
+
     useEffect(() => {
         setLikesArray(post.likes);
         if (likesArray.includes(user.id)) {
             setLiked(true);
         }
+        setPostTitle(post.title);
+        setPostBody(post.body);
     }, [post])
+
+    useEffect(() => {
+        if (editMode === false) {
+            setPostTitle(post.title);
+            setPostBody(post.body);
+        }
+    }, [editMode])
+
+    useEffect(() => {
+        setShowEmptyCommentWarning(false);
+    }, [newComment])
+
+    useEffect(() => {
+        setShowEmptyPostWarning(false);
+    }, [postTitle, postBody])
 
     return (
         <CommunityPostWrapper>
@@ -207,13 +321,19 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
                     <Button float="right" onClick={() => {setShowModal(true)}}>
                         <CancelIcon sx={{fill: Constants.WHITE100, fontSize: '1.625em'}}/>
                     </Button>
-                    <Button float="right">
+                    <Button float="right" onClick={() => setEditMode(!editMode)}>
                         <ModeEditOutlineOutlinedIcon sx={{fill: Constants.WHITE100}}/>
                     </Button>
                 </>
                 ) : null
             }
-            <PostTitle>{post.title}</PostTitle>
+            { editMode 
+                ? <TitleEditInput 
+                    required
+                    value={postTitle}
+                    onChange={handleTitleChange}/>
+                : <PostTitle>{post.title}</PostTitle>
+            }
             <TextDiv>
                 <span>
                     <PostedBy>Posted by </PostedBy>
@@ -223,24 +343,41 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
             </TextDiv>
             { showModal? <Modal functions={modalFunctions}/> : null }
             <TextDiv>
-                <PostBody>{post.body}</PostBody>
+                {editMode
+                    ? <BodyEditInput 
+                        required 
+                        value={postBody}
+                        onChange={handleBodyChange}/>
+                    : <PostBody>{post.body}</PostBody>}
+                
             </TextDiv>
             <Button onClick={handleLikes}>
                 <VerticallyCenter>
                     { likesArray.includes(user.id)
-                        ? <ThumbUpIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
-                        : <ThumbUpOutlinedIcon sx={{fill: Constants.WHITE100, fontSize: '1.5em'}}/>
+                        ? <ThumbUpIcon sx={{fill: Constants.WHITE100, fontSize: '2em'}}/>
+                        : <ThumbUpOutlinedIcon sx={{fill: Constants.WHITE100, fontSize: '2em'}}/>
                     }
-                    <WhiteText>{likesArray.length}</WhiteText>    
+                    <WhiteText>{likesArray.length}</WhiteText>  
                 </VerticallyCenter>
             </Button>
-            <InputDiv>
+            { editMode 
+                ? <SaveChangesButton onClick={saveEditChanges}>Save Changes</SaveChangesButton> 
+                : <InputDiv>
                 <CommentInput 
                     placeholder="Reply to this post here..."
                     onChange={handleNewCommentChange}
+                    required
                 />
                 <SubmitButton onClick={submitNewComment}>Submit</SubmitButton>
-            </InputDiv>
+            </InputDiv> }
+            {showEmptyPostWarning
+            ? <>
+                <CenterAlignedFlex direction="column">
+                    <EmptyWarning>Post title and body cannot be empty!</EmptyWarning> 
+                </CenterAlignedFlex>
+              </>
+            : null}
+            {showEmptyCommentWarning? <EmptyWarning>Comments cannot be empty.</EmptyWarning> : null}
             {post.comments.map(comment => {
                 return (
                 <CommentDiv>
