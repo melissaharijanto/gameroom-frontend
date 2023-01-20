@@ -6,6 +6,7 @@ import { LogOut } from './Button';
 import { Home } from '@mui/icons-material';
 import { useAuth } from '../compiler/context/Authentication';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const StyledNavBar = styled.div`
     overflow: hidden;
@@ -69,20 +70,47 @@ const StyledSearchBar = styled.input`
 `
 const NavigationBar = () => {
     const auth = useAuth();
-
     const navigate = useNavigate();
 
     const logOut = () => {
         auth?.logout();
         navigate("/");
     }
+
+
+    const navigateToSearchPage = () => {
+        navigate(`/search/${searchKeywords}`)
+    }
+
+    const [searchKeywords, setSearchKeywords] = useState<string>("");
+
+    const handleChange = (e: any) => {
+        setSearchKeywords(e.target.value);
+    }
+
+    let searchBar = document.getElementById("search-bar");
+
+    searchBar?.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            navigateToSearchPage();
+            setSearchKeywords("");
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    })
+
     return (
         <StyledNavBar>
             <StyledConsole src={Console}/>
             <StyledWhiteText src={WhiteTextLogo}/>
             <LogOut onClick={logOut}>Log Out</LogOut>
             <StyledHomeIcon href="/dashboard"><Home sx={{fontSize: "2.5em"}}/></StyledHomeIcon>
-            <StyledSearchBar type="text" placeholder="Search.."/>
+            <StyledSearchBar 
+                id="search-bar"
+                placeholder="Search.."
+                value={searchKeywords}
+                onChange={handleChange}
+            />
         </StyledNavBar>
     )
 }
