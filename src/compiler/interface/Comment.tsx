@@ -1,3 +1,6 @@
+/**
+ * Custom Comment type. Aids in TypeScript checks.
+ */
 export interface Comment {
     id: number;
     body: string;
@@ -8,6 +11,10 @@ export interface Comment {
     likes: number[]
 }
 
+/**
+ * A comment initial state before the real comments 
+ * are fetched from the backend.
+ */
 export const CommentInitialState : Comment = {
     id: 0,
     body: "",

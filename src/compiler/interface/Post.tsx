@@ -1,3 +1,6 @@
+/**
+ * Custom Post type. Aids in TypeScript checks.
+ */
 export interface Post {
     id: number;
     title: string;
@@ -11,6 +14,9 @@ export interface Post {
     likes: number[]
 }
 
+/**
+ * A post initial state before the real posts are fetched from the backend.
+ */
 export const PostInitialState : Post = {
     id: 0,
     title: "",
