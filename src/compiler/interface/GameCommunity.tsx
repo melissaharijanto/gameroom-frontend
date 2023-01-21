@@ -1,7 +1,6 @@
-export interface GameCommunities {
-    gameCommunity: GameCommunity[]
-}
-
+/**
+ * Custom GameCommunity type. Aids in TypeScript checks.
+ */
 export interface GameCommunity {
     id: number;
     title: string;
@@ -13,6 +12,10 @@ export interface GameCommunity {
     posts: number[];
 }
 
+/**
+ * A game community initial state before the real communities
+ * are fetched from the backend.
+ */
 export const GameCommunityInitialValue : GameCommunity = {
     id: 0,
     title: "",
