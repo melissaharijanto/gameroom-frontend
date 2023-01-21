@@ -6,13 +6,13 @@
 
 # GameRoom (stylized as gameroom, in all lower cases)
 
+<h4>Please view this project on a desktop, with full window tab size, as the application is not designed to be responsive (yet).</h4>
+
 GameRoom is a forum for gamers to interact with each other. Due to the creator's love for playing games, she decided to center her project around this interest.
 
 This project is heavily inspired by <u>Reddit</u>, as well as <u>Spotify</u> (for the frontend). The two have heavily influenced the entire design of this project.
 
 **Warning: This project is heavily limited and is only currently restricted to having communities for a few games. Due to the creator's limited knowledge, there are a lot of things which are still unoptimized.**
-
-<h4>Please view this project on a desktop, with full window tab size, as the website is not designed to be responsive (yet)</h4>
 
 # Table of Contents
 
@@ -46,6 +46,7 @@ Future iterations:
 * Allowing users to make their own communities
 * Having an account page where users can customize their profiles
 * Implement Rich Text Editor or MarkDown features for the posts
+* Designing a responsive website
 
 # User Guide
 
