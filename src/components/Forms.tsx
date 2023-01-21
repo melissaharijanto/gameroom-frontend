@@ -6,6 +6,7 @@ import { LogIn, SignUp } from './Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../compiler/context/Authentication';
+import LoadingModal from './LoadingModal';
 
 /**
  * Wrapper to keep two different text components in one line.
@@ -47,6 +48,8 @@ const LoginForm = () => {
         password: ""
     });
 
+    const [loading, setLoading] = useState<Boolean>(false);
+
     const navigate = useNavigate();
 
     /**
@@ -63,11 +66,11 @@ const LoginForm = () => {
     }
 
     const handleSubmit = () => {
+        setLoading(true);
         axios.post(Constants.API_ENDPOINT + "/login", user)
             .then((response) => {
-                console.log(response);
-                alert("You have successfully logged in!");
                 auth?.login(response.data.token, response.data.user);
+                setLoading(false);
                 navigate('/dashboard')
             }).catch((error) => {
                 console.log(error);
@@ -78,6 +81,7 @@ const LoginForm = () => {
         <div>
             <form>
                 <LeftAlignedFlex direction="column">
+                    { loading? <LoadingModal/> : null }
                     <StyledLabel>Username</StyledLabel>
                     <StyledInput 
                         required 
@@ -115,6 +119,8 @@ const SignUpForm = () => {
         }
     });
 
+    const [loading, setLoading] = useState<Boolean>(false);
+
     const navigate = useNavigate();
 
     const handleUsernameChange = (e: any) => {
@@ -138,10 +144,11 @@ const SignUpForm = () => {
     }
     
     const handleSubmit = () => {
+        setLoading(true);
         axios.post(Constants.API_ENDPOINT + "/signup", user)
             .then((response) => {
-                alert("You have successfully signed up!");
                 auth?.login(response.data.token, response.data.user);
+                setLoading(false);
                 navigate('/dashboard')
             }).catch((error) => {
                 console.log(error.response);
@@ -152,6 +159,7 @@ const SignUpForm = () => {
         <div>
             <form>
                 <LeftAlignedFlex direction="column">
+                    { loading? <LoadingModal/> : null }
                     <TextCombiner>
                         <StyledLabel color={Constants.WHITE100}>What will your </StyledLabel>
                         <StyledLabel>username </StyledLabel>
