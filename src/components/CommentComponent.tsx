@@ -87,6 +87,11 @@ const EmptyWarning = styled.span`
     font-size: 1em;
 `
 
+/**
+ * Displays a comment component in a community post page.
+ * @param commentId The id of the comment.
+ * @returns The designed comment component.
+ */
 const CommentComponent = ({ commentId } : { commentId : number }) => {
 
     /**
@@ -153,6 +158,10 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
             .catch(error => console.log(error));
     }
 
+    /**
+     * Deletes comment from the backend upon user input. Reloads
+     * page if successful to display the changes.
+     */
     const deleteComment = () => {
         axios.delete(Constants.API_ENDPOINT + `/comments/${commentId}`, {
             headers: {
@@ -199,7 +208,8 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
     } 
 
     /**
-     * Saves comment change and sends them to the backend.
+     * Saves comment change and sends them to the backend. If successful, page will be
+     * reloaded to the display the updated changes.
      */
     const saveCommentChange = () => {
         if (commentBody.trim() === "") {
@@ -223,10 +233,17 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         }
 
     }
+    
+    /**
+     * Fetches comment upon page display.
+     */
     useEffect(() => {
         fetchComment();
     }, [])
 
+    /**
+     * Hook to determine whether a user has liked a post or not.
+     */
     useEffect(() => {
         setLikesArray(comment.likes);
         if (comment.likes.includes(user.id)) {
@@ -235,12 +252,19 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         setCommentBody(comment.body);
     }, [comment])
 
+    /**
+     * If a user cancels editing, the comment body's contents displayed in the edit mode will be
+     * restored to its original content body.
+     */
     useEffect(() => {
         if (editMode === false) {
             setCommentBody(comment.body);
         }
     }, [editMode])
 
+    /**
+     * Hides warning display once the user types in the comment body.
+     */
     useEffect(() => {
         setShowWarning(false);
     }, [commentBody]);
