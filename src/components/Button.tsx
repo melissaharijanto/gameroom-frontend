@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import * as Constants from '../constants';
 
+/**
+ * Reused button styles.
+ */
 const Button = styled.button`
     font-family: Metropolis-SemiBold;
     font-size: 1.5em;
@@ -9,6 +12,10 @@ const Button = styled.button`
     border-radius: 50px;
     cursor: pointer;
 `
+
+/**
+ * Login button.
+ */
 const LogIn = styled(Button)<{marginRight: string}>`
     background: linear-gradient(to right, ${Constants.MAGENTA100}, ${Constants.BLUE100});
     color: white;
@@ -19,6 +26,10 @@ const LogIn = styled(Button)<{marginRight: string}>`
         opacity: 0.65;
     }
 `
+
+/**
+ * Sign Up button.
+ */
 const SignUp = styled(Button)`
     background-color: ${Constants.YELLOW100};
     color: black;
@@ -28,6 +39,9 @@ const SignUp = styled(Button)`
     }
 `
 
+/**
+ * Log out button for the navigation bar.
+ */
 const LogOut = styled(Button)`
     padding: 0.75em 3em 0.75em 3em !important;
     font-size: 1em !important;
@@ -43,6 +57,9 @@ const LogOut = styled(Button)`
     }
 `
 
+/**
+ * Create post button for the community pages.
+ */
 const CreatePost = styled.button`
     background-color: ${Constants.MAGENTA100};
     border: 2px solid;
@@ -60,6 +77,9 @@ const CreatePost = styled.button`
     }
 `
 
+/**
+ * Back button shown in the CreatePostPage.
+ */
 const BackButton = styled.button`
     background: linear-gradient(${Constants.BLUE100}, ${Constants.PURPLE100});
     border: none;
