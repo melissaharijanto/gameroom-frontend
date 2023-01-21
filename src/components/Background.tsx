@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import * as Constants from '../constants';
 import { DefaultLayout } from './Layout';
 
+/**
+ * Background before login.
+ */
 const StyledBackgroundBeforeLogin = styled(DefaultLayout)`
     background: url(${Background}) ${Constants.BLACK90};
     background-blend-mode: multiply;
@@ -13,6 +16,10 @@ const StyledBackgroundBeforeLogin = styled(DefaultLayout)`
     justify-content: center;
     align-items: center;
 `
+
+/**
+ * Plain black background.
+ */
 const BlackBackground = styled.div`
     background-color: ${Constants.BLACK100};
     width: 100vw;
