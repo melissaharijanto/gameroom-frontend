@@ -49,10 +49,24 @@ const CommentCount = styled(PostBody)`
     margin-left: 0.75em;
 `
 
+/**
+ * A post component to be displayed on the CommunityPage. Instead of displaying the full body like
+ * CommunityPostComponent, this serves as a 'Post Preview' and displays a limited amount of characters 
+ * of the comment body.
+ * 
+ * @param post The post object fetched from the backend.
+ * @returns A designed post component.
+ */
 const PostComponent = ({ post } : { post: Post }) => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    /**
+     * Parses date into DD MMMMMMM YYYY format, e.g. 31 January 2022.
+     * 
+     * @param date Timestamp from Rails backend.
+     * @returns Parsed date.
+     */
     const parseDate = (date: string) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
@@ -80,6 +94,13 @@ const PostComponent = ({ post } : { post: Post }) => {
         navigate(`/community/${id}/posts/${post.id}`)
     }
 
+    /**
+     * Parses the comment body if it is more than 1150 characters. If it is less,
+     * it will return the original comment body.
+     * 
+     * @param body The comment body.
+     * @returns The summarized comment body.
+     */
     const parseBody = (body: string) => {
         if (body.length > 1150) {
             let substring = body.substring(0, 1150);

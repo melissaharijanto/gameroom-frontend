@@ -26,11 +26,19 @@ const PostDiv = styled.div`
     margin-right: 1vw;
 `
 
+/**
+ * Displays a page with a complete post, as well as its comments.
+ * 
+ * @returns A styled community page.
+ */
 const CommunityPostPage = () => {
     const navigate = useNavigate();
     const { id, postid } = useParams();
     const [post, setPost] = useState<Post>(PostInitialState);
 
+    /**
+     * Gets post data from backend through its ID.
+     */
     const getPost = () => {
         axios.get(Constants.API_ENDPOINT + `/posts/${postid}`, {
             headers: {
@@ -46,6 +54,9 @@ const CommunityPostPage = () => {
         navigate(`/community/${id}`)
     }
 
+    /**
+     * Gets post upon page load.
+     */
     useEffect(() => {
         getPost();
     }, [])
@@ -61,7 +72,6 @@ const CommunityPostPage = () => {
                     <CommunityPostComponent post={post}/>
                 </PostDiv>
             </WrapperDiv>
-            
         </BlackBackground>
     )
 }

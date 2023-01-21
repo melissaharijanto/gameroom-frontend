@@ -41,13 +41,21 @@ const StyledInput= styled.input`
     }
 `
 
+/**
+ * Displays a login component for the login page.
+ * 
+ * @returns A styled login form.
+ */
 const LoginForm = () => {
+    /**
+     * Use authentication context; this is declared so that the logged in user
+     * can be recorded as a permanent state throughout the application.
+     */
     const auth = useAuth();
     const [user, setUser] = useState({
         username: "",
         password: ""
     });
-
     const [loading, setLoading] = useState<Boolean>(false);
 
     const navigate = useNavigate();
@@ -65,6 +73,11 @@ const LoginForm = () => {
         }));
     }
 
+    /**
+     * Handles submission of the login form.
+     * Displays the LoadingModal as the data is sent to the backend.
+     * Navigates to dashboard if successful.
+     */
     const handleSubmit = () => {
         setLoading(true);
         axios.post(Constants.API_ENDPOINT + "/login", user)
@@ -110,6 +123,11 @@ const LoginForm = () => {
     )
 }
 
+/**
+ * Displays a sign up component for the sign up page.
+ * 
+ * @returns A styled sign up form.
+ */
 const SignUpForm = () => {
     const auth = useAuth();
     const [user, setUser] = useState({
@@ -118,7 +136,6 @@ const SignUpForm = () => {
             password: ""
         }
     });
-
     const [loading, setLoading] = useState<Boolean>(false);
 
     const navigate = useNavigate();
@@ -143,6 +160,11 @@ const SignUpForm = () => {
         }))
     }
     
+    /**
+     * Handles submission of the sign up form.
+     * Displays LoadingModal while the data is being sent to the backend.
+     * Navigates to the dashboard if successful.
+     */
     const handleSubmit = () => {
         setLoading(true);
         axios.post(Constants.API_ENDPOINT + "/signup", user)

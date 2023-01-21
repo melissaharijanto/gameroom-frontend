@@ -60,6 +60,10 @@ const LoadingText = styled.span`
     padding-top: 0.5em;
 `
 
+/**
+ * Displays when a user is waiting for log in/sign up processes.
+ * @returns A loading modal.
+ */
 const LoadingModal = () => {
 
     return (

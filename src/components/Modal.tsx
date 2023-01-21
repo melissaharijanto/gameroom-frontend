@@ -82,6 +82,12 @@ export interface ModalType {
     cancel: () => void;
 }
 
+/**
+ * Displays a modal when the user tries to delete a post or comment.
+ * 
+ * @param functions functions to cancel delete or to delete.
+ * @returns A modal.
+ */
 const Modal = ({functions} : {functions: ModalType}) => {
     return (
         <FixedBlackBackground>

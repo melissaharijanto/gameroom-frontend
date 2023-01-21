@@ -152,9 +152,23 @@ const EmptyWarning = styled.span`
     font-size: 1em;
 `
 
+/**
+ * The main post component showed once the User clicks on a PostComponent (aka Post Preview)
+ * in the CommunityPage.
+ * 
+ * @param post The post data fetched from the backend.
+ * @returns The designed community post component.
+ */
 const CommunityPostComponent = ({post} : {post : Post}) => {
 
+    /**
+     * Fetches the ID displayed in the URL. The specified id is the game community ID.
+     */
     const { id } = useParams();
+
+    /**
+     * Fetches user data and username from session storage.
+     */
     const user = JSON.parse(sessionStorage.getItem("user")!);
 
     const [liked, setLiked] = useState<Boolean>(false);
@@ -168,7 +182,13 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
     const [showEmptyPostWarning, setShowEmptyPostWarning] = useState<Boolean>(false);
 
     const navigate = useNavigate();
-    
+
+    /**
+     * Parses date into DD MMMMMMM YYYY format, e.g. 31 January 2022.
+     * 
+     * @param date Timestamp from Rails backend.
+     * @returns Parsed date.
+     */
     const parseDate = (date: string) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
@@ -192,6 +212,10 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         return parsedDate;
     }
 
+    /**
+     * Deletes post upon user input. If successful, the page will navigate to the
+     * game community page.
+     */
     const deletePost = () => {
         axios.delete(Constants.API_ENDPOINT + `/posts/${post.id}`, {
             headers: {
@@ -216,10 +240,10 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         cancel: cancelShowModal,
     }
 
-    const handleNewCommentChange = (e : any) => {
-        setNewComment(e.target.value);
-    }
-
+    /**
+     * Sends the new comment back to the database. If the comment body
+     * is empty, it will display a warning message.
+     */
     const submitNewComment = () => {
         if (newComment.trim() === "") {
             setShowEmptyCommentWarning(true);
@@ -244,6 +268,9 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         }
     }
 
+    /**
+     * Handles likes of the post based on the user input and sends the data back to the database,
+     */
     const handleLikes = () => {
         axios.post(Constants.API_ENDPOINT + `/post_likes`, {
             id: post.id,
@@ -260,6 +287,13 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         }).catch(error => console.log(error.response.data));
     }
 
+    /**
+     * handle[*]Change methods for the input elements to detect changes of its values
+     * and record them to the states. The recorded states aid in sending the data back 
+     * to the backend.
+     * 
+     * @param e The event in which the user input is recorded.
+     */
     const handleTitleChange = (e: any) => {
         setPostTitle(e.target.value);
     }
@@ -268,6 +302,15 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         setPostBody(e.target.value)
     }
 
+    const handleNewCommentChange = (e : any) => {
+        setNewComment(e.target.value);
+    }
+
+    /**
+     * Saves changes made when the user edits a post and sends the updated data back to the backend.
+     * If the user leaves the post title OR body empty, an error message will be shown. Otherwise,
+     * if the data is successfully sent to the backend, the page will reload to reflect the changes.
+     */
     const saveEditChanges = () => {
         if (postBody.trim() === "" || postTitle.trim() === "") {
             setShowEmptyPostWarning(true);
@@ -289,6 +332,10 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         }
     }
 
+    /**
+     * Fires upon the initialization of the post parameter. If the user has liked a post, 
+     * then it will display a filled thumb; otherwise, it will display a thumb outline.
+     */
     useEffect(() => {
         setLikesArray(post.likes);
         if (likesArray.includes(user.id)) {
@@ -298,6 +345,10 @@ const CommunityPostComponent = ({post} : {post : Post}) => {
         setPostBody(post.body);
     }, [post])
 
+    /**
+     * If user cancels editing, the values of the input and textarea associated with the editing
+     * mode will be reverted to its original state.
+     */
     useEffect(() => {
         if (editMode === false) {
             setPostTitle(post.title);

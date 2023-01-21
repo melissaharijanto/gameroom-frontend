@@ -15,6 +15,10 @@ const StyledText = styled.span`
     color: ${Constants.WHITE100}
 `
 
+/**
+ * The root page of the application.
+ * @returns A styled landing page.
+ */
 const LandingPage = () => {
 
     const navigation = useNavigate();

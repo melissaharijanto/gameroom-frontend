@@ -69,6 +69,11 @@ const StyledSearchBar = styled.input`
         outline: none;
     }
 `
+
+/**
+ * A navigation bar to be displayed on each page after authentication.
+ * @returns A styled navigation bar.
+ */
 const NavigationBar = () => {
     const auth = useAuth();
     const navigate = useNavigate();
@@ -102,6 +107,10 @@ const NavigationBar = () => {
     let searchBar = document.getElementById("search-bar");
 
 
+    /**
+     * Event listener, so that once the user presses enter, the query 
+     * is immediately sent to the backend to be processed.
+     */
     searchBar?.addEventListener("keydown", event => {
         if (event.key === "Enter") {
             navigateToSearchPage();

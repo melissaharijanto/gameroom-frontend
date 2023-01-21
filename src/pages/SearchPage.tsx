@@ -42,6 +42,10 @@ const HorizontalLine = styled.hr`
     margin-top: 0.75vw;
 `
 
+/**
+ * Displays a page with game communities according to the user's expected result.
+ * @returns A styled page with search results.
+ */
 const SearchPage = () => {
 
     const { keyword } = useParams();

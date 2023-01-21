@@ -10,6 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { BoldText, HeadingWrapper } from '../components/StyledText';
 import RedirectToDashboardRoute from '../components/RedirectToDashboardRoute';
 
+/**
+ * Displays a page with a login form.
+ * @returns A styled login page.
+ */
 const LoginPage = () => {
     const navigation = useNavigate();
 
