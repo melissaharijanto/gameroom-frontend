@@ -11,6 +11,9 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Modal, { ModalType } from './Modal';
 import { useParams } from 'react-router-dom';
 
+/**
+ * The main parent div of the comment component.
+ */
 const CommentWrapper = styled.div`
     background: linear-gradient(${Constants.YELLOW25}, ${Constants.YELLOW75});
     border-radius: 20px;
@@ -78,18 +81,41 @@ const SaveChangesButton = styled.button`
     }
 `
 
+const EmptyWarning = styled.span`
+    color: ${Constants.YELLOW100};
+    font-family: Metropolis-SemiBoldItalic;
+    font-size: 1em;
+`
+
 const CommentComponent = ({ commentId } : { commentId : number }) => {
 
+    /**
+     * User object fetched from the session storage.
+     */
     const user = JSON.parse(sessionStorage.getItem("user")!);
+
+    /**
+     * Post ID grabbed from the URL.
+     */
     const { postid } = useParams();
 
+    /**
+     * States used in this component.
+     */
     const [comment, setComment] = useState<Comment>(CommentInitialState);
     const [liked, setLiked] = useState<Boolean>(false);
     const [likesArray, setLikesArray] = useState<number[]>([]);
     const [showModal, setShowModal] = useState<Boolean>(false);
     const [editMode, setEditMode] = useState<Boolean>(false);
     const [commentBody, setCommentBody] = useState<string>("");
+    const [showWarning, setShowWarning] = useState<Boolean>(false);
 
+    /**
+     * Parses date into DD MMMMMMM YYYY format, e.g. 31 January 2022.
+     * 
+     * @param date Timestamp from Rails backend.
+     * @returns Parsed date.
+     */
     const parseDate = (date: string) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
@@ -113,6 +139,9 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         return parsedDate;
     }
 
+    /**
+     * Fetches comment from the backend.
+     */
     const fetchComment = () => {
         axios.get(Constants.API_ENDPOINT + `/comments/${commentId}`, {
             headers: {
@@ -136,6 +165,7 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         }).catch(error => console.log(error));
     }
 
+
     const cancelShowModal = () => {
         setShowModal(false);
     }
@@ -145,6 +175,9 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         cancel: cancelShowModal,
     }
 
+    /**
+     * Handles user's like actions and send the updated values to the backend.
+     */
     const handleLikes = () => {
         axios.post(Constants.API_ENDPOINT + `/comment_likes`, {
             id: commentId,
@@ -165,9 +198,12 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         setCommentBody(e.target.value);
     } 
 
+    /**
+     * Saves comment change and sends them to the backend.
+     */
     const saveCommentChange = () => {
         if (commentBody.trim() === "") {
-
+            setShowWarning(true);
         } else {
             axios.put(Constants.API_ENDPOINT + `/comments/${comment.id}`, {
                 comment: {
@@ -205,9 +241,13 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
         }
     }, [editMode])
 
+    useEffect(() => {
+        setShowWarning(false);
+    }, [commentBody]);
+
     return (
         <CommentWrapper>
-            {showModal? <Modal functions={modalFunctions}/> : null}
+            { showModal? <Modal functions={modalFunctions}/> : null }
             { comment.user_id === user.id
                 ? (
                 <>
@@ -242,6 +282,12 @@ const CommentComponent = ({ commentId } : { commentId : number }) => {
                 </VerticallyCenter>
             </Button>
             { editMode ? <SaveChangesButton onClick={saveCommentChange}>Save Changes</SaveChangesButton> : null }
+            { showWarning
+                ? <>
+                    <br/>
+                    <EmptyWarning>A comment cannot be empty.</EmptyWarning>
+                  </>
+                : null }
         </CommentWrapper>
     )
 }
