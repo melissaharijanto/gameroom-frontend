@@ -68,18 +68,33 @@ const TextWrapper = styled(CenterAlignedFlex)`
     flex-direction: column;
 `
 
+/**
+ * Displays a page with a header and game icon, as well as post previews.
+ * 
+ * @returns A styled community page.
+ */
 const CommunityPage = () => {
+
+    /**
+     * Grabs the game ID from the URL.
+     */
     let { id } = useParams();
+    const navigate = useNavigate();
     const [posts, setPosts] = useState<Post[]>([]);
     const [gameCommunity, setGameCommunity] = useState<GameCommunity>(GameCommunityInitialValue);
-    const navigate = useNavigate();
 
+    /**
+     * Fetches game community data from the backend.
+     */
     const fetchGameCommunityData = () => {
         axios.get(Constants.API_ENDPOINT + `/game_communities/${id}`)
             .then(response => setGameCommunity(response.data))
             .catch(error => console.log(error));
     }
 
+    /**
+     * Fetches posts from the backend based on the game community ID.
+     */
     const fetchPosts = () => {
         axios.post(Constants.API_ENDPOINT + "/community_posts", {game_community_id: id}, {
             headers: {
@@ -98,10 +113,16 @@ const CommunityPage = () => {
         navigate(`/community/${id}/posts/new`)
     }
 
+    /**
+     * Fetches game community data upon load.
+     */
     useEffect(() => {
         fetchGameCommunityData();
     }, [])
 
+    /**
+     * Fetches posts upon initialization of gameCommunity.
+     */
     useEffect(() => {
         fetchPosts();
     }, [gameCommunity])

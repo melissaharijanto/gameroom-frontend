@@ -83,6 +83,11 @@ const DashboardPage = () => {
             return arr;
     }
 
+    /**
+     * Fetches games from the backend. Once the response is received,
+     * the data is filtered (so that it only displays communities) that
+     * the user has not followed and limits the post to 6 or 9 communities.
+     */
     const fetchGames = () => {
         axios.get(Constants.API_ENDPOINT + '/game_communities', {
             headers: {
@@ -110,6 +115,9 @@ const DashboardPage = () => {
         })
     }
 
+    /**
+     * Fetches communities followed by the user.
+     */
     const fetchUserFollowing = () => {
         axios.get(Constants.API_ENDPOINT + '/follow', {
             headers: {
@@ -122,6 +130,11 @@ const DashboardPage = () => {
         }).catch(error => console.log(error));
     }
 
+    /**
+     * Displays the following component if the user does not follow any communities.
+     * @returns Nine recommended game communities, as well as a text encouraging the users
+     * to start following communities.
+     */
     const NoFollowingTextComponent = () => {
         return (
             <CenterAlignedFlex direction="column">
@@ -141,6 +154,11 @@ const DashboardPage = () => {
         )
     }
 
+    /**
+     * Displays the following component if the user follows some communities.
+     * 
+     * @returns Communities followed by the user.
+     */
     const UserFollowingComponent = () => {
         return (
             <div>

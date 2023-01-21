@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import { BoldText, HeadingWrapper } from '../components/StyledText';
 import RedirectToDashboardRoute from '../components/RedirectToDashboardRoute';
 
+/**
+ * Displays a page with a sign up form.
+ * 
+ * @returns A styled sign up page.
+ */
 const SignUpPage = () => {
     const navigation = useNavigate();
 
