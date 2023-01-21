@@ -12,6 +12,8 @@ This project is heavily inspired by <u>Reddit</u>, as well as <u>Spotify</u> (fo
 
 **Warning: This project is heavily limited and is only currently restricted to having communities for a few games. Due to the creator's limited knowledge, there are a lot of things which are still unoptimized.**
 
+<h4>Please view this project on a desktop, with full window tab size, as the website is not designed to be responsive (yet)</h4>
+
 # Table of Contents
 
 * [Purpose](#purpose)
