@@ -7,6 +7,7 @@ import { Home } from '@mui/icons-material';
 import { useAuth } from '../compiler/context/Authentication';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import LogOutModal, { LogOutModalType } from './LogOutModal';
 
 const StyledNavBar = styled.div`
     overflow: hidden;
@@ -83,12 +84,23 @@ const NavigationBar = () => {
     }
 
     const [searchKeywords, setSearchKeywords] = useState<string>("");
+    const [showModal, setShowModal] = useState<Boolean>(false)
+
+    const hideModal = () => {
+        setShowModal(false);
+    }
+
+    const modalFunctions : LogOutModalType = {
+        cancel: hideModal,
+        logout: logOut
+    }
 
     const handleChange = (e: any) => {
         setSearchKeywords(e.target.value);
     }
 
     let searchBar = document.getElementById("search-bar");
+
 
     searchBar?.addEventListener("keydown", event => {
         if (event.key === "Enter") {
@@ -101,9 +113,10 @@ const NavigationBar = () => {
 
     return (
         <StyledNavBar>
+            { showModal ? <LogOutModal functions={modalFunctions}/> : null }
             <StyledConsole src={Console}/>
             <StyledWhiteText src={WhiteTextLogo}/>
-            <LogOut onClick={logOut}>Log Out</LogOut>
+            <LogOut onClick={() => setShowModal(true)}>Log Out</LogOut>
             <StyledHomeIcon href="/dashboard"><Home sx={{fontSize: "2.5em"}}/></StyledHomeIcon>
             <StyledSearchBar 
                 id="search-bar"
