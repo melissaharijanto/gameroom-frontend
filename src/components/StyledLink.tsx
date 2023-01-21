@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as Constants from '../constants';
+
 export const BackToLandingPageText = styled.a`
     color: ${Constants.WHITE100};
     text-decoration-line: underline;

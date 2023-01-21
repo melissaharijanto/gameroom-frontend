@@ -76,6 +76,12 @@ export interface LogOutModalType {
     logout: () => void;
 }
 
+/**
+ * Displays a modal when the user clicks on the log out button on the navigation bar.
+ * 
+ * @param functions functions to cancel log out or to proceed with log out.
+ * @returns A log out modal.
+ */
 const LogOutModal = ({functions} : {functions: LogOutModalType}) => {
     return (
         <FixedBlackBackground>

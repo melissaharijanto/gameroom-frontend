@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { GameCommunity } from '../compiler/interface/GameCommunity';
 import * as Constants from '../constants';
 
+/**
+ * Picks a random color between blue, magenta, or purple for the linear gradient
+ * overlay for the GameCommunityContainer.
+ * @returns A random color between blue, magenta, or purple.
+ */
 const pickRandomColor = () => {
     var colorArray = [Constants.BLUE100, Constants.MAGENTA100, Constants.PURPLE100];
     var random_number = Math.random();
@@ -59,6 +64,11 @@ const BottomLeftText = styled.span`
     z-index: 3;
 `
 
+/**
+ * Displays a game's name and its cover image, with a gradient overlay.
+ * @param game The game fetched from the backend.
+ * @returns A styled game community container.
+ */
 const GameCommunityContainer = ({ game } : { game: GameCommunity }) => {
     
     const navigate = useNavigate();

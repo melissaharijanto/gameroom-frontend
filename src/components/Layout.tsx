@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+/**
+ * A file containing different layouts of different displays.
+ */
+
 const DefaultLayout = styled.div`
     display: flex;
     flex-direction: column;
