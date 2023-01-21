@@ -6,7 +6,7 @@
 
 # GameRoom (stylized as gameroom, in all lower cases)
 
-GameRoom is a forum for gamers to interact with each other. Due to the creator's love for playing games, she decided to make center her project around this interest.
+GameRoom is a forum for gamers to interact with each other. Due to the creator's love for playing games, she decided to center her project around this interest.
 
 This project is heavily inspired by <u>Reddit</u>, as well as <u>Spotify</u> (for the frontend). The two have heavily influenced the entire design of this project.
 
