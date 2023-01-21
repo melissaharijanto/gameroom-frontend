@@ -100,6 +100,12 @@ const FollowerAmount = styled.div`
     padding: 0.375vw 1.25vw;
 `
 
+/**
+ * Displays a header that will show if the user clicks on a game community.
+ * 
+ * @param game The game details, such as its icon, name, and followers list.
+ * @returns The designed community header.
+ */
 const CommunityHeader = ({game}: {game: GameCommunity}) => {
 
     const user : User = JSON.parse(sessionStorage.getItem("user")!);
@@ -107,6 +113,11 @@ const CommunityHeader = ({game}: {game: GameCommunity}) => {
     const [followers, setFollowers] = useState<Array<Number>>(game.followers);
     const postFollowRequest = JSON.parse(`{ "id": ${game.id} }`);
 
+    /**
+     * Determines whether a user has followed a community. If the user has followed it,
+     * the follow button will display "Followed"; otherwise it will display the default
+     * button.
+     */
     const setFollowedStatus = () => {
         axios.post(Constants.API_ENDPOINT + "/follow", postFollowRequest, {
             headers: {
