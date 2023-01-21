@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import * as Constants from '../constants';
 import Logo from '../resources/images/logos/console-only.png';
@@ -61,19 +60,6 @@ const LoadingText = styled.span`
     padding-top: 0.5em;
 `
 
-const TipText = styled.span`
-    background-color: ${Constants.YELLOW100};
-    border-radius: 20px;
-    color: ${Constants.BLACK100};
-    margin-top: 3em;
-    font-family: Metropolis-Bold;
-    font-size: 1em;
-    line-height: 1.25;
-    padding-bottom: 0.5em;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5em;
-`
 const LoadingModal = () => {
 
     return (
@@ -81,7 +67,6 @@ const LoadingModal = () => {
             <FixedDiv>
                 <StyledLogo src={Logo}/>
                 <LoadingText id="loading">Loading</LoadingText>
-                {/* <TipText>If the page does not load after a while, please refresh and try again.</TipText> */}
             </FixedDiv>
         </FixedBlackBackground>
     )
