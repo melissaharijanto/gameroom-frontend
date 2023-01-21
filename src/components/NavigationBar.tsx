@@ -123,8 +123,10 @@ const NavigationBar = () => {
     return (
         <StyledNavBar>
             { showModal ? <LogOutModal functions={modalFunctions}/> : null }
-            <StyledConsole src={Console}/>
-            <StyledWhiteText src={WhiteTextLogo}/>
+            <a href="/dashboard">
+                <StyledConsole src={Console}/>
+                <StyledWhiteText src={WhiteTextLogo}/>
+            </a>
             <LogOut onClick={() => setShowModal(true)}>Log Out</LogOut>
             <StyledHomeIcon href="/dashboard"><Home sx={{fontSize: "2.5em"}}/></StyledHomeIcon>
             <StyledSearchBar 

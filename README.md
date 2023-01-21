@@ -1,46 +1,113 @@
-# Getting Started with Create React App
+<p align="center">
+    <a href="https://gameroom-forum.netlify.app/">
+        <img src="src/resources/images/logos/complete-logo.png" width="200px"/>
+    </a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GameRoom (stylized as gameroom, in all lower cases)
 
-## Available Scripts
+GameRoom is a forum for gamers to interact with each other. Due to the creator's love for playing games, she decided to center her project around this interest.
 
-In the project directory, you can run:
+This project is heavily inspired by <u>Reddit</u>, as well as <u>Spotify</u> (for the frontend). The two have heavily influenced the entire design of this project.
 
-### `npm start`
+**Warning: This project is heavily limited and is only currently restricted to having communities for a few games. Due to the creator's limited knowledge, there are a lot of things which are still unoptimized.**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Table of Contents
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* [Purpose](#purpose)
+* [Features](#features)
+* [User Guide](#user-guide)
+* [Queries, Feedback, Improvements](#queries-feedback-improvements)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Purpose
 
-### `npm run build`
+This project is built for Computing for Voluntary Welfare Organization's (CVWO) assignment, with a TypeScript React frontend and a Ruby on Rails backend.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+As a CRUD app, users are able to:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Create a new post
+* Read other users' posts
+* Update their posts (edit)
+* Delete their posts
 
-### `npm run eject`
+These basic CRUD features also work for comments, which can be made for each post.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Additional features are as follows:
+* Authentication system
+* Categorizing posts into communities
+* Search function (which is still faulty, but is still functioning)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Future iterations:
+* Allowing users to make their own communities
+* Having an account page where users can customize their profiles
+* Implement Rich Text Editor or MarkDown features for the posts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# User Guide
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Landing Page, Log In and Sign Up Pages
 
-## Learn More
+<img src="src/resources/images/readme/landing.png">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+When accessing https://gameroom-forum.netlify.app for the first time, you will be directed to the landing page where you can access the Log In or Sign Up pages.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="src/resources/images/readme/log-in.png" width="45%">
+<img src="src/resources/images/readme/sign-up.png" width="45%">
+
+The account restrictions are as follows:
+
+* Its username must be **3 to 30 characters** long and **cannot start or end with _ or .**
+* Its password must be **at least 6 characters** long.
+
+**Warning: The log-in or sign-up process might take too long at times. Please refresh if it does not load after a few minutes.**
+
+### Dashboard
+
+<img src="src/resources/images/readme/dashboard.png" width="45%">
+<img src="src/resources/images/readme/dashboard-with-followings.png" width="45%">
+
+The dashboard is where you can access your followings. If you follow one or multiple communities, you are able to view them here. 
+
+You can use the search bar on top to search for communities (press **Enter** on your keyboard to enter your query). The home button is for you to redirect back to the dashboard from any page. Alternatively, clicking on the logo on the top left does the same thing.
+
+### Community Page
+
+<img src="src/resources/images/readme/community-page.png">
+
+On this page, you can:
+
+* Create a new post by clicking on the `+ Create New Post` button.
+* View a post by pressing on the posts (the black-blue gradient container).
+* Follow a community.
+
+### Create Post Page
+
+<img src="src/resources/images/readme/create-post.png">
+
+Create a post by typing in a title and a post body, and click `Publish`.
+
+### Community Post Page
+
+<img src="src/resources/images/readme/community-post-page.png">
+
+In this page, you can enter a comment by typing a reply on the input field and clicking `Submit`.
+
+When clicking on the posts on the [Community Page](#community-page), you will be able to read others' posts and also comment on it.
+
+### Search Page
+
+<img src="src/resources/images/readme/search.png">
+
+Utilizing the search bar on top to search for your query and pressing `Enter` on your keyboard will yield this kind of results. However, the search function is currently not always accurate, so it might show inaccurate results from time to time.
+
+# Queries, Feedback, Improvements
+
+For any queries or feedback, please leave them [here](https://forms.gle/mjNugkyK7dbxoebz5)! It is an anonymous form.
+
+<hr>
+
+<p align="center">
+    <b><i>Built by <a href="https://github.com/melissaharijanto">@melissaharijanto</a> on GitHub</i></b>.
+</p>
