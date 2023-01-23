@@ -99,6 +99,8 @@ In this page, you can enter a comment by typing a reply on the input field and c
 
 When clicking on the posts on the [Community Page](#community-page), you will be able to read others' posts and also comment on it.
 
+To delete posts, simply press the bin on the top right corner and click `Yes, I want to delete this` in the confirmation modal. To edit posts, click the pencil icon and text fields should show in place of the title and post body. Simply edit them and click `Save changes` to save your changes, or the pencil icon to cancel any changes.
+
 ### Search Page
 
 <img src="src/resources/images/readme/search.png">
