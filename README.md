@@ -6,6 +6,8 @@
 
 # GameRoom (stylized as gameroom, in all lower cases)
 
+## Note: The database has been suspended and will not be renewed. For the backend code base, please refer to <a href="https://github.com/melissaharijanto/gameroom-backend">this repository</a>.
+
 <h4>Please view this project on a desktop, with full window tab size, as the application is not designed to be responsive (yet).</h4>
 
 GameRoom is a forum for gamers to interact with each other. Due to the creator's love for playing games, she decided to center her project around this interest.
