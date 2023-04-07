@@ -4,6 +4,7 @@ import Logo from '../resources/images/logos/console-only.png';
 
 const FixedBlackBackground = styled.div`
     background-color: ${Constants.BLACK90};
+    backdrop-filter: blur(5px);
     bottom: 0px;
     left: 0px;
     width: 100vw;
