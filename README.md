@@ -6,7 +6,7 @@
 
 # GameRoom (stylized as gameroom, in all lower cases)
 
-## Note: The database has been suspended and will not be renewed. For the backend code base, please refer to <a href="https://github.com/melissaharijanto/gameroom-backend">this repository</a>.
+## Note: The database will be renewed every three months as it is running on a free plan. This project was made for CVWO and now kept up for fun ^^
 
 <h4>Please view this project on a desktop, with full window tab size, as the application is not designed to be responsive (yet).</h4>
 
